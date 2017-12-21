@@ -296,7 +296,7 @@ $provinceResult = $connect->select($provinceQuery);
 				</div>
 
 				<div class="modal-body">
-					<form id="contactPerson" action="#" class="form-validate-jquery">
+					<form id="contactPerson" class="form-validate-jquery" >
 						<div class="row">
 							<div class="col-lg-12">
 								<legend class="text-bold">Contact Person Details</legend>
@@ -354,24 +354,22 @@ $provinceResult = $connect->select($provinceQuery);
 </html>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-	    $('#contactPerson').formValidation({
-	        message: 'This value is not valid',
-	        excluded: ':disabled',
-	        ...
-	    });
-	});
 
 	function addToContactTable(contactPerson,designation,contactNumber,telephoneNumber,faxNumber,emailAddress){
-		var table = $('#table1').DataTable();
-		var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
-		var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
-		var cNumber = "<td><input type='hidden' value= "+contactNumber+" name='contactNumber[]' >"+contactNumber+"</td>";
-		var tNumber = "<td><input type='hidden' value= "+telephoneNumber+" name='telephoneNumber[]' >"+telephoneNumber+"</td>";
-		var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]' >"+faxNumber+"</td>";
-		var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
-		var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
-		table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
+		var n = emailAddress.search("@");
+		if(contactPerson!=""&&designation!=""&&contactNumber!=""&&telephoneNumber!=""&&emailAddress!=""&&n==0){
+
+				var table = $('#table1').DataTable();
+				var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
+				var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
+				var cNumber = "<td><input type='hidden' value= "+contactNumber+" name='contactNumber[]' >"+contactNumber+"</td>";
+				var tNumber = "<td><input type='hidden' value= "+telephoneNumber+" name='telephoneNumber[]' >"+telephoneNumber+"</td>";
+				var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]' >"+faxNumber+"</td>";
+				var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
+				var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
+				table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
+			}
+			return false;
 	}
 	function getCity(val){
 		$.ajax({

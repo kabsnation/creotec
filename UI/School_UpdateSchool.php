@@ -211,6 +211,8 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                                     <div class="input-group-btn">
                                                     	<button class="btn btn-primary" id="btn1" onclick="HideEventListPanel(this)"><i class="icon-pencil" style="margin-right: 5px;"></i>Edit</button> 
                                                     </div>
+                                                    <div id="msg">
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -637,9 +639,17 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 					}
 				});
 		    }
+		    //updateeee
 		    function updateSchoolName(id){
 		    	var val = document.getElementById('newSchoolName').value;
-		    	// alert(id+val);
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolName.php",
+					data: "idSchool=" + id +"&schoolName="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?id='+id;
+					}
+				});
 		    }
 		    function showDiv(){
 		    	var x = document.getElementById('viewSchool');

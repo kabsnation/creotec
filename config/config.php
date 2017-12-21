@@ -3,7 +3,7 @@ class Connect
 {
 	private $db_host = 'localhost';
 	private $db_user ='root';
-	private $db_pass='1234';
+	private $db_pass='123456';
 	private $db_database ='creotec';
 	private $conn = '';
 

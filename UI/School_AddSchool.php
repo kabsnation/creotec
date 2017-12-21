@@ -37,6 +37,7 @@ $provinceResult = $connect->select($provinceQuery);
 	<script type="text/javascript" src="assets/js/core/app.js"></script>
 	<script type="text/javascript" src="assets/js/pages/datatables_data_sources.js"></script>
 	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
 	<!-- /theme JS files -->
 </head>
 <style type="text/css">
@@ -234,12 +235,48 @@ $provinceResult = $connect->select($provinceQuery);
 
 										<div class="col-lg-12">
 											<fieldset class="content-group">
-												<legend class="text-bold">Contact Person</legend>
+												<legend class="text-bold">Add School Contact Person</legend>
 												<div class="text-right">
-													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_AddContactPerson"><i class="icon-phone-plus2 position-left"></i>Add Contact Person</button> 
+													<button type="button" class="btn btn-default" style="margin-bottom: 20px;"><i class="icon-phone-plus2 position-left"></i>Add</button> 
 												</div>
 
-												<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
+												<div class="col-lg-6">
+													<legend class="text-bold">Contact Person</legend>
+													<div class="form-group">
+														<label><strong>Contact Person:</strong><span class="text-danger">*</span> </label>
+														<input id="txtContactPerson" name="txtContactPerson" type="text" class="form-control" required="required"/>
+													</div>
+
+													<div class="form-group">
+														<label><strong>Designation:</strong><span class="text-danger">*</span> </label>
+														<input id="txtDesignation" name="txtDesignation" type="text" class="form-control" required="required"/>
+													</div>
+												</div>
+
+												<div class="col-lg-6">
+													<legend class="text-bold">Contact Information</legend>
+													<div class="form-group">
+														<label><strong>Cellphone Number:</strong><span class="text-danger">*</span> </label>
+														<input id="txtContactNumber" name="txtContactNumber" required="required"="required="required"" class="form-control" data-mask="(+63) 999-999-9999" placeholder="(+63) 999-999-9999">
+													</div>
+
+													<div class="form-group">
+														<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
+														<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control" required="required"/>
+													</div>
+
+													<div class="form-group">
+														<label><strong>Fax Number:</strong></label>
+														<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control"/>
+													</div>
+
+													<div class="form-group">
+														<label><strong>Email Address:</strong><span class="text-danger">*</span> </label>
+														<input id="txtEmailAddress" name="txtEmailAddress" type="email" class="form-control" required="required"/>
+													</div>
+												</div>
+
+												<table class="table datatable-html" style="font-size: 13px; width: 100%" name="table1" id="table1">
 
 													<thead style="font-size: 13px;">
 														<tr>
@@ -298,35 +335,9 @@ $provinceResult = $connect->select($provinceQuery);
 							<div class="col-lg-12">
 								<legend class="text-bold">Contact Person Details</legend>
 												
-								<div class="form-group">
-									<label><strong>Contact Person:</strong><span class="text-danger">*</span> </label>
-									<input id="txtContactPerson" name="txtContactPerson" type="text" class="form-control" required="required"/>
-								</div>
+								
 
-								<div class="form-group">
-									<label><strong>Designation:</strong><span class="text-danger">*</span> </label>
-									<input id="txtDesignation" name="txtDesignation" type="text" class="form-control" required="required"/>
-								</div>
-
-								<div class="form-group">
-									<label><strong>Cellphone Number:</strong><span class="text-danger">*</span> </label>
-									<input id="txtContactNumber" name="txtContactNumber" required="required"="required="required"" class="form-control" data-mask="(+63) 999-999-9999" placeholder="(+63) 999-999-9999">
-								</div>
-
-								<div class="form-group">
-									<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
-									<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control" required="required"/>
-								</div>
-
-								<div class="form-group">
-									<label><strong>Fax Number:</strong><span class="text-danger">*</span> </label>
-									<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control" required="required"/>
-								</div>
-
-								<div class="form-group">
-									<label><strong>Email Address:</strong><span class="text-danger">*</span> </label>
-									<input id="txtEmailAddress" name="txtEmailAddress" type="email" class="form-control" required="required"/>
-								</div>
+								
 							</div>
 						</div>
 					</form>

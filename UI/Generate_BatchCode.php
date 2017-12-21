@@ -1,22 +1,7 @@
 <?php
-require_once('../config/config.php');
-$connect = new Connect();
-$con = $connect-> connectDB();
-if(isset($_POST["batchcode"])){
-$batchcode = mysqli_real_escape_string($con,stripcslashes(trim($_POST["batchcode"])));
-	}
-$query = 'SELECT * FROM province ORDER BY provinceName';
-$queryCourse= 'SELECT * FROM targetcourse ORDER BY targetcourse';
-$queryReligion = 'SELECT * FROM Religion ORDER BY religion';
-$queryNationality= 'SELECT * FROM Nationality ORDER BY Nationality';
-$queryRelationship= 'SELECT * FROM Relationship ORDER BY Relationship';
-$queryGender= 'SELECT * FROM gender ORDER BY genderName';
-$resultsReligion= $connect->select($queryReligion);
-$resultsNationality=$connect->select($queryNationality);
-$results = $connect -> select($query);
-$resultsCourse= $connect -> select($queryCourse);
-$resultsRelationship= $connect -> select($queryRelationship);
-$resultsGender= $connect -> select($queryGender);
+require_once('../UI/SchoolHandler.php');
+$handler = new SchoolHandler();
+$resultSchool = $handler->getSchool();
 ?>
 
 <html>
@@ -28,7 +13,7 @@ $resultsGender= $connect -> select($queryGender);
 
 	<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
 
-	<!-- Global stylesheets -->
+		<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -36,6 +21,37 @@ $resultsGender= $connect -> select($queryGender);
 	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
+
+
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/forms/wizards/stepy.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/validation/validate.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/pickers/anytime.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/legacy.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/wizard_stepy.js"></script>
+	<script type="text/javascript" src="assets/js/pages/uploader_bootstrap.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/uploaders/fileinput.min.js"></script>
+	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables_data_sources.js"></script>
+	<!-- /theme JS files -->
+
+	<script src="assets/js/validation.js"></script>
 </head>
 <body>
 	<!-- Main navbar -->
@@ -185,59 +201,37 @@ $resultsGender= $connect -> select($queryGender);
 									<div class="col-lg-12"><legend class="text-bold">Choose School </legend></div>
 									
 									<div class="box">
-						<div class="panel-heading">
-
-									<h5 class="panel-title">Student Directory</h5>
+										<div class="panel-heading">
 
 									<div class="heading-elements">
 
-										
-										<div class="form-group">
-											<label>Batch: </label>					                 
-											<select class="select">
-												<?php $tempo;
-													foreach($resultBatch as $batch){
-														if($tempo != $batch['idbatch']){
-															$tempo = $batch['idbatch'];
-													?>
-													<option value="<?php echo $batch['idbatch'];?>"><?php echo $batch['idbatch'];?></option>
-													<?php }}?>
-							                </select>
-							                <br />
-
-						    	<button type="button" class="btn btn-info" onclick="printAttendance();"><i class="icon-printer" style="margin-right: 5px;"></i>Print</button>
-						    		<br />
-						    		</div>					         
+									
 						    	</div>
 
 								</div>
 
 								<div class="panel-body">
-									<table class="table datatable-html" name="table1" id="table1">
+									<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
 
-										<thead style="font-size: 14px;">
+										<thead style="font-size: 13px;">
 											<tr>
-								                <th>Batch Code</th>
-								                <th>Name</th>
-								                <th>School</th>
-								                <th>Strand</th>
-								                <th>Target Course</th>
+												<th style="width: 5%;"><a></a><i class="icon-check"></i></th>
+								                <th>School Name</th>
+								                <th>Location</th>
 								            </tr>
 										</thead>
 
-										<tbody style="font-size: 13px;">
-										<?php foreach($resultsAccount as $result){
+										<tbody style="font-size: 12px;">
+											<?php if($resultSchool){
+												foreach($resultSchool as $result){
 												?>
 								            <tr>
-								                <td>dfsdfdfsd</td>
-								                <td>dfdsf</td>
-								                <td>kdfsdkf</td>
-								                <td>dfkdfds</td>
-								                <td>sfdsfdsfds</td>
-												
+								            	<td> <input type="checkbox" name="idschool[]" value="<?php echo $result['idSchool'];?>" id="idschool"></td>
+								                <td><?php echo $result['schoolName'];?></td>
+								                <td><?php echo $result['cityName'].", ".$result['provinceName'];?></td>
 								            </tr>
-								            <?php }?>
-
+								            <?php }}?>
+								          
 								        </tbody>
 
 									</table>
@@ -252,62 +246,6 @@ $resultsGender= $connect -> select($queryGender);
 							<fieldset title="3">
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
-
-									<div class="col-md-3">
-										<div class="content-group-md">
-											<label class="control-label">Birthdate: <span class="text-danger">*</span></label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Gender: <span class="text-danger">*</span></label>
-										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsGender as $result) {?>
-																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Contact Number: <span class="text-danger">*</span></label>
-										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Email Address: <span class="text-danger">*</span></label>
-										<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
-									</div>
-								</div>
-
-								<div class="row" style="margin-bottom: 20px;">
-									<div class="col-md-6">
-										<label class="control-label col-lg-6">Nationality: <span class="text-danger">*</span></label>
-										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsNationality as $result){?>
-																		<option value="<?php echo $result['idnationality'];?>">
-																			<?php echo $result['nationality']?>
-																		</option>
-																		<?php }?>
-										</select>
-									</div>
-
-									<div class="col-md-6">
-										<label class="control-label col-lg-4">Religion: <span class="text-danger">*</span></label>
-										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsReligion as $result) {?>
-																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
 								</div>
 							</fieldset>
 
@@ -353,40 +291,3 @@ $resultsGender= $connect -> select($queryGender);
 
 </body>
 
-	<!-- Core JS files -->
-	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
-	<!-- /core JS files -->
-
-	<!-- Theme JS files -->
-	<script type="text/javascript" src="assets/js/plugins/forms/wizards/stepy.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/forms/validation/validate.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/anytime.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.date.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/picker.time.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/legacy.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
-	<script type="text/javascript" src="assets/js/core/app.js"></script>
-	<script type="text/javascript" src="assets/js/pages/wizard_stepy.js"></script>
-	<script type="text/javascript" src="assets/js/pages/picker_date.js"></script>
-	<script type="text/javascript" src="assets/js/pages/uploader_bootstrap.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/uploaders/fileinput.min.js"></script>
-	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
-	<!-- /theme JS files -->
-
-	<script src="assets/js/validation.js"></script>
-<script type="text/javascript">
-	$('#myModal').on('shown.bs.modal', function () {
-		$('#myInput').trigger('focus')
-
-	});
-</script>
-</html>

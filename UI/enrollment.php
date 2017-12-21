@@ -96,14 +96,14 @@ $resultsGender= $connect -> select($queryGender);
 									<div class="col-lg-12"><legend class="text-bold">Name</legend></div>
 									<div class="col-md-4">
 											<div class="form-group">
-												<label class="control-label col-lg-3">Last Name:<span class="text-danger">*</span></label>
+												<label class="control-label col-lg-4">Last Name:<span class="text-danger">*</span></label>
 												<input id="txtLastName" name="txtLastName" required="required" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
 										</div>
 
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="control-label col-lg-3">First Name:<span class="text-danger">*</span></label>
+												<label class="control-label col-lg-4">First Name:<span class="text-danger">*</span></label>
 												<input id="txtFirstName" name="txtFirstName" required="required" type="text" class="form-control" required onkeyup="validname(this)">
 											</div>
 										</div>

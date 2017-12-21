@@ -237,7 +237,7 @@ $provinceResult = $connect->select($provinceQuery);
 											<fieldset class="content-group">
 												<legend class="text-bold">Add School Contact Person</legend>
 												<div class="text-right">
-													<button type="button" class="btn btn-default" style="margin-bottom: 20px;"><i class="icon-phone-plus2 position-left"></i>Add</button> 
+													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)"><i class="icon-phone-plus2 position-left"></i>Add</button>
 												</div>
 
 												<div class="col-lg-6">
@@ -345,7 +345,7 @@ $provinceResult = $connect->select($provinceQuery);
 
 				<div class="modal -footer">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)">Save</button>
+					
 				</div>
 			</div>
 		</div>

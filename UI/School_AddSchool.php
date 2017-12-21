@@ -78,7 +78,7 @@ $provinceResult = $connect->select($provinceQuery);
 
 						<ul class="dropdown-menu dropdown-menu-right">
 							<!-- <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li> -->
-							<li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+							<li><a href="index.php"><i class="icon-switch2"></i> Logout</a></li>
 						</ul>
 					</li>
 				</ul>

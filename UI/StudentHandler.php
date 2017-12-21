@@ -11,5 +11,16 @@ class StudentHandler{
 		$result = $con->insert($query);
 		return $result;
 	}
+	public function getStudentsByBatchAndStrand($idbatch,$idstrand){
+		$con = new Connect();
+		$query = "SELECT firstName, LastName, schoolName, strand, targetCourse, batchCode 
+		FROM accountinformation, applicants, batch, targetcourse, school, strand
+		where applicants.idAccountInformation=accountinformation.idAccountInformation  
+		and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
+		and applicants.idtargetcourse=targetcourse.idtargetcourse 
+		and applicants.idSchool=school.idSchool and batch.idbatch= ".$idbatch." and applicants.idstrand = ".$idstrand;
+		$result = $con->insert($query);
+		return $result;
+	}
 }
 ?>

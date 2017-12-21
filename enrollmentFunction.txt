@@ -1,0 +1,71 @@
+<?php
+require_once('../config/config.php');
+$connect = new Connect();
+$con = $connect-> connectDB();
+if(isset($_POST["batchcode"])){
+	//applicant
+	$batchcode = mysqli_real_escape_string($con,stripcslashes(trim($_POST["batchcode"])));
+	$lastName = mysqli_real_escape_string($con,stripcslashes(trim($_POST ["txtLastName"])));
+	$firstName = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtFirstName"])));
+	$middleName = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtMiddleName"])));
+	$province = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownProvince"]));
+	$city = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownCity"]));
+	$barangay = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtBarangay"])));
+	$subdivision =mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtSubdivision"])));
+	$houseNo = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtSubdivisionBlock"])));
+	$school = mysqli_real_escape_string($con,stripcslashes($_POST["txtSchoolName"]));
+	$strand = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownStrand"]));
+	$bdate = mysqli_real_escape_string($con,stripcslashes($_POST["bdate"]));
+	$gender = mysqli_real_escape_string($con,stripcslashes($_POST["optionsRadios"]));
+	$contactNumber = mysqli_real_escape_string($con,stripcslashes($_POST["contactNumber"]));
+	$emailAddress = mysqli_real_escape_string($con,stripcslashes($_POST["emailAddress"]));
+	$religion = mysqli_real_escape_string($con,stripcslashes($_POST["txtReligion"]));
+	$targetCourse = mysqli_real_escape_string($con,stripcslashes($_POST["txtTargetCourse"]));
+	//Guardian
+	$gLastName = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGlastName"])));
+	$gFirstName = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGfirstName"])));
+	$gMiddleName = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGmiddleName"])));
+	$guardianName = $gFirstName." ".$middleName." ".$lastName;
+	$relationship = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownRelationship"]));
+	$gContactNumber = mysqli_real_escape_string($con,stripcslashes($_POST["gContactNumber"]));
+	$gEmailAddress = mysqli_real_escape_string($con,stripcslashes($_POST["txtGemailAddress"]));
+	$gProvince = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownGprovince"]));
+	$gCity = mysqli_real_escape_string($con,stripcslashes($_POST["dropdownCity1"]));
+	$gBarangay = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGbarangay"])));
+	$gSubdivision = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGsubdivision"])));
+	$gHouseNo = mysqli_real_escape_string($con,stripcslashes(trim($_POST["txtGsubdivisionBlock"])));
+	$homeAddress = "";
+	$gHomeAddress = "";
+	
+	if($subdivision =="" || $subdivision == " " && $gSubdivision ==""|| $gSubdivision== " "){
+		$homeAddress = $houseNo.", ".$barangay;
+		$gHomeAddress = $gHouseNo.", ".$gBarangay;
+	}
+	else{
+		$homeAddress = $houseNo.", ".$subdivision.", ".$barangay;
+		$gHomeAddress = $gHouseNo.", ".$gSubdivision.", ".$barangay;
+	}
+	
+	$query = "INSERT INTO `accountinformation`(`firstName`, `middleName`, `lastName`, `contactNumber`, `emailAddress`, `homeAddress`, `birthDate`, `idCity`, `nationaility`, `religion`, `gName`, `gRelationship`, `gAddress`, `gContactNumber`, `gEmailAddress`, `idGender`)  VALUES('".$firstName."','".$middleName."','".$lastName."','".$contactNumber."','".$emailAddress."','".$homeAddress."','".$bdate."',".$city.",'filipino','".$religion."','".$guardianName."','".
+		$relationship."','".$gHomeAddress."','".$gContactNumber."','".$gEmailAddress."',".$gender.")";
+	$result = $connect -> insertWithLastId($query);
+	if($result!=""){
+		$query="INSERT INTO `applicants`(`target_course`, `idAccountInformation`, `idStrand`, `idbatch`) VALUES('".$targetCourse."',".$result.",".$strand.",(SELECT idbatch FROM batch WHERE batchCode = '".$batchcode."'))";
+		$result = $connect -> insert($query);
+		if($result){
+			echo '<script type="text/javascript">
+				window.location = "enrollment.php";
+				alert("Success!");
+				</script>';
+		}
+		else{
+			echo '<script type="text/javascript">
+				window.location = "enrollment.php";
+				alert("Error!");
+				</script>';
+		}
+	}
+}
+else
+	echo $_POST["batchcode"]. "yeah";
+?>

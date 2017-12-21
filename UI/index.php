@@ -28,7 +28,7 @@
 		<div class="navbar-collapse collapse">
 			<div class="navbar-right">
 				<ul class="nav navbar-nav">
-					<li><a href="School_AddSchool.php"><i class="icon-office position-left"></i><strong>Add School</strong></a></li>
+					<li><a href="School_AddSchool.php"><i class="icon-user position-left"></i><strong>Sign In</strong></a></li>
 					<li><a data-toggle="modal" data-target="#modal_apply"><i class="icon-pencil position-left"></i><strong>Apply</strong></a></li>
 				</ul>
 			</div>

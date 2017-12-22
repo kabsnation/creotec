@@ -259,7 +259,8 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                         <div id="editSchoolAddress" class="col-md-6" style="display: none;">
                                         	<div class="form-group">
 												<label><strong>New Province:</strong><span class="text-danger">*</span> </label>
-												<select type="text" class="form-control select" onchange="getCity(this.value)"/>
+												<select name="dropdownProv" id="dropdownProv" class="form-control select" onchange="getCity(this.value)"/>
+													<option></option>
 													<?php foreach($provinceResult as $province){?>
 													<option value="<?php echo $province['idProvince'];?>" onchange="getCity(this.value)"><?php echo $province['provinceName'];?></option>
 													<?php }?>
@@ -268,13 +269,13 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
 											<div class="form-group">
 												<label><strong>New City / Municipality:</strong><span class="text-danger">*</span> </label>
-												<select type="text" name="dropdownCity" id="dropdownCity" class="form-control select" /></select> 
+												<select name="dropdownCity" id="dropdownCity" class="form-control select" /></select> 
 											</div>
 
 											<div class="form-group">
 												<div class="text-right">
 													<a class="btn btn-danger" onclick="HideEventListPanel1(this)">Cancel</a>
-		                                        	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+		                                        	<a class="btn btn-primary" onclick="updateSchoolAdd(<?php echo $id?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
 												</div>
 											</div>
 	                                    </div>
@@ -639,13 +640,25 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 					}
 				});
 		    }
-		    //updateeee
+		    //updateeee name
 		    function updateSchoolName(id){
 		    	var val = document.getElementById('newSchoolName').value;
 		    	$.ajax({
 					type: "POST",
 					url: "updateSchoolName.php",
 					data: "idSchool=" + id +"&schoolName="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?id='+id;
+					}
+				});
+		    }
+		     //updateeee add
+		    function updateSchoolAdd(id){
+		    	var city = document.getElementById('dropdownCity').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolAdd.php",
+					data: "idSchool=" + id +"&city="+city,
 					success: function(data){
 						window.location ='School_UpdateSchool.php?id='+id;
 					}

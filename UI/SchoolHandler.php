@@ -11,7 +11,7 @@ class SchoolHandler{
 	}
 	public function getSchool(){
 		$connect = new Connect();
-		$query = "SELECT * FROM `school` JOIN city ON school.idCity = city.idCity JOIN province ON city.idProvince = province.idProvince where markasdelete = 0 ORDER BY schoolName";
+		$query = "SELECT * FROM `school` JOIN city ON school.idCity = city.idCity JOIN province ON city.idProvince = province.idProvince where markasdeleted = 0 ORDER BY schoolName";
 		$result = $connect -> select($query);
 		return $result;
 	}

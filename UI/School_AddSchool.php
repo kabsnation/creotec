@@ -341,7 +341,7 @@ $provinceResult = $connect->select($provinceQuery);
 				</div>
 
 					<div class="modal-footer">
-						<input type="submit" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)" class="btn btn-default" Text="Submit"></input>
+						<input type="button" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)" class="btn btn-default" value="Submit"></input>
 					</div>
 
 				</form>
@@ -357,8 +357,8 @@ $provinceResult = $connect->select($provinceQuery);
 
 	function addToContactTable(contactPerson,designation,contactNumber,telephoneNumber,faxNumber,emailAddress){
 		var n = emailAddress.search("@");
-		if(contactPerson!=""&&designation!=""&&contactNumber!=""&&telephoneNumber!=""&&emailAddress!=""&&n==0){
 
+		if(contactPerson!=""&&designation!=""&&contactNumber!=""&&telephoneNumber!=""&&emailAddress!=""&&n!=0){
 				var table = $('#table1').DataTable();
 				var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
 				var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
@@ -368,8 +368,8 @@ $provinceResult = $connect->select($provinceQuery);
 				var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
 				var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
 				table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
+				$('#modal_AddContactPerson').modal('hide');
 			}
-			return false;
 	}
 	function getCity(val){
 		$.ajax({

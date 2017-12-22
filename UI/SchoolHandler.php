@@ -15,6 +15,12 @@ class SchoolHandler{
 		$result = $connect -> select($query);
 		return $result;
 	}
+	public function getCenter(){
+		$connect = new Connect();
+		$query = "SELECT * FROM center JOIN city ON city.idCity = center.idCity JOIN province ON city.idProvince = province.idProvince ORDER BY centerName";
+		$result = $connect -> select($query);
+		return $result;
+	}
 	public function getContactPersonBySchoolId($idSchool){
 		$connect = new Connect();
 		$query ="SELECT * FROM `contactPersonDetails` WHERE idSchool= ".$idSchool;

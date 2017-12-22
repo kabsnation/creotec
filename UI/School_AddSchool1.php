@@ -260,7 +260,7 @@
 
 							</fieldset>
 
-							<button type="submit" class="btn btn-primary stepy-finish">Save <i class="icon-check position-right"></i></button>
+							<button type="submit" class="btn btn-blue stepy-finish">Save <i class="icon-check position-right"></i></button>
 						</form>
 
 					</div>

@@ -13,7 +13,7 @@ $resultSchool = $handler->getSchool();
 
 	<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
 
-		<!-- Global stylesheets -->
+<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -21,8 +21,6 @@ $resultSchool = $handler->getSchool();
 	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
-
-
 
 	<!-- Core JS files -->
 	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
@@ -37,21 +35,14 @@ $resultSchool = $handler->getSchool();
 	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
 	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/forms/validation/validate.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/anytime.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/pickers/pickadate/legacy.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+
 	<script type="text/javascript" src="assets/js/core/app.js"></script>
 	<script type="text/javascript" src="assets/js/pages/wizard_stepy.js"></script>
-	<script type="text/javascript" src="assets/js/pages/uploader_bootstrap.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/uploaders/fileinput.min.js"></script>
-	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+	<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+	<script type="text/javascript" src="assets/js/pages/datatables_data_sources.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables_data_sources.js"></script>
 	<!-- /theme JS files -->
-
-	<script src="assets/js/validation.js"></script>
 </head>
 <body>
 	<!-- Main navbar -->

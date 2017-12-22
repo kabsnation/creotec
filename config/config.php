@@ -41,5 +41,9 @@ class Connect
 		$result = mysqli_query($this->conn, $query);
 		return $result;
 	}
+	public function update($query){
+		$result = mysqli_query($this->conn, $query);
+		return $result;
+	}
 }
 ?>

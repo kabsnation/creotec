@@ -79,6 +79,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
     <script type="text/javascript" src="assets/js/pages/form_validation.js"></script>
     <script type="text/javascript" src="assets/js/plugins/forms/validation/validate.min.js"></script>
        <script type="text/javascript" src="assets/js/plugins/uploaders/fileinput.min.js"></script>
+       	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
 	<!-- /theme JS files -->
 </head>
 <style type="text/css">
@@ -259,7 +260,8 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                         <div id="editSchoolAddress" class="col-md-6" style="display: none;">
                                         	<div class="form-group">
 												<label><strong>New Province:</strong><span class="text-danger">*</span> </label>
-												<select type="text" class="form-control select" onchange="getCity(this.value)"/>
+												<select name="dropdownProv" id="dropdownProv" class="form-control select" onchange="getCity(this.value)"/>
+													<option></option>
 													<?php foreach($provinceResult as $province){?>
 													<option value="<?php echo $province['idProvince'];?>" onchange="getCity(this.value)"><?php echo $province['provinceName'];?></option>
 													<?php }?>
@@ -268,13 +270,13 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
 											<div class="form-group">
 												<label><strong>New City / Municipality:</strong><span class="text-danger">*</span> </label>
-												<select type="text" name="dropdownCity" id="dropdownCity" class="form-control select" /></select> 
+												<select name="dropdownCity" id="dropdownCity" class="form-control select" /></select> 
 											</div>
 
 											<div class="form-group">
 												<div class="text-right">
 													<a class="btn btn-danger" onclick="HideEventListPanel1(this)">Cancel</a>
-		                                        	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+		                                        	<a class="btn btn-primary" onclick="updateSchoolAdd(<?php echo $id?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
 												</div>
 											</div>
 	                                    </div>
@@ -338,7 +340,9 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 								</div>
 
 								<div class="panel-body">
-
+									<?php
+													foreach($resultPerson as $result){
+												?>
 									<div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -346,7 +350,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["contactName"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -358,20 +362,20 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                             </div>
                                         </div>
-  
+ 
                                         <div id="editContactPersonName" class="col-md-6" style="display: none;">
                                         	<div class="form-group">
                                             	<label><span class="text-danger">* </span><strong>New Contact Person Name:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input class="form-control" id="contactName" value="" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel2(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactPersonName(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -385,7 +389,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["designation"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -403,14 +407,14 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             	<label><span class="text-danger">* </span><strong>New Designation:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input class="form-control" id="designation" value="" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel3(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactDesignation(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,7 +428,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["cellphoneNumber"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -442,14 +446,14 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             	<label><span class="text-danger">* </span><strong>New Cellphone Number:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input class="form-control" id="cell" data-mask="(+63) 999-999-9999" placeholder="(+63) 999-999-9999" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel4(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactCell(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -463,7 +467,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["telephoneNumber"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -481,14 +485,14 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             	<label><span class="text-danger">* </span><strong>New Telephone Number:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input class="form-control" id="tele" data-mask="(+99) 9999999" placeholder="(+99) 9999999" value="" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel5(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactTele(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -502,7 +506,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["faxNumber"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -541,7 +545,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 
                                                 <div id="SchoolName" class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" disabled="true"/>
+                                                    	<input class="form-control" value="<?php echo $result["emailAddress"];?>" disabled="true"/>
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -572,7 +576,9 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             </div>
                                         </div>
                                     </div>
-
+                                    <?php
+													}
+												?>
 								</div>
 							</div>
 						</div>
@@ -639,15 +645,75 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 					}
 				});
 		    }
-		    //updateeee
+		    //updateeee name
 		    function updateSchoolName(id){
 		    	var val = document.getElementById('newSchoolName').value;
 		    	$.ajax({
 					type: "POST",
-					url: "updateSchoolName.php",
+					url: "updateSchoolFunction.php",
 					data: "idSchool=" + id +"&schoolName="+val,
 					success: function(data){
 						window.location ='School_UpdateSchool.php?id='+id;
+					}
+				});
+		    }
+		     //updateeee add
+		    function updateSchoolAdd(id){
+		    	var city = document.getElementById('dropdownCity').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idSchool=" + id +"&city="+city,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?id='+id;
+					}
+				});
+		    }
+		     //updateeee name
+		    function updateContactPersonName(id){
+		    	var val = document.getElementById('contactName').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson=" + id +"&Cname="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
+					}
+				});
+		    }
+		     //updateeee designation
+		    function updateContactDesignation(id){
+		    	var val = document.getElementById('designation').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson=" + id +"&Cdes="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
+					}
+				});
+		    }
+		     //updateeee designation
+		    function updateContactCell(id){
+		    	var val = document.getElementById('cell').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson="+id+"&Ccell="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
+					}
+				});
+		    }
+		     //updateeee designation
+		    function updateContactTele(id){
+		    	var val = document.getElementById('tele').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson="+id+"&Ctele="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
 					}
 				});
 		    }

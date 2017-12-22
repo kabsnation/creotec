@@ -44,6 +44,16 @@ if(isset($_POST["idContactPerson"])&&!empty($_POST["idContactPerson"]))
 		$sql = "UPDATE contactpersondetails SET telephoneNumber='$name' WHERE idcontactPerson='$id'";
 		$resultsGender= $connect -> update($sql);
 	}
+	if  (isset($_POST["Cfax"])){
+		$name = mysqli_real_escape_string($con,stripcslashes(trim($_POST["Cfax"])));
+		$sql = "UPDATE contactpersondetails SET faxNumber='$name' WHERE idcontactPerson='$id'";
+		$resultsGender= $connect -> update($sql);
+	}
+	if  (isset($_POST["Cemail"])){
+		$name = mysqli_real_escape_string($con,stripcslashes(trim($_POST["Cemail"])));
+		$sql = "UPDATE contactpersondetails SET emailAddress='$name' WHERE idcontactPerson='$id'";
+		$resultsGender= $connect -> update($sql);
+	}
 }
 ?>
 	

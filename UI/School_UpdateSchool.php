@@ -524,14 +524,14 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             	<label><span class="text-danger">* </span><strong>New Fax Number:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input class="form-control" id="fax"  data-mask="(+99) 9999999" placeholder="(+99) 9999999" value="" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel6(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactFax(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -563,14 +563,14 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
                                             	<label><span class="text-danger">* </span><strong>New Email Address:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" value="" />
+                                                    	<input type="email" id="email" class="form-control" value="" />
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group-btn">
                                                     	<a class="btn btn-danger" onclick="HideEventListPanel7(this)">Cancel</a>
-                                                    	<a class="btn btn-primary" onclick=""><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
+                                                    	<a class="btn btn-primary" onclick="updateContactEmail(<?php echo $idPerson?>)"><i class="icon-pencil" style="margin-right: 5px;"></i>Save</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -693,7 +693,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 					}
 				});
 		    }
-		     //updateeee designation
+		     //updateeee cell
 		    function updateContactCell(id){
 		    	var val = document.getElementById('cell').value;
 		    	$.ajax({
@@ -705,13 +705,37 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 					}
 				});
 		    }
-		     //updateeee designation
+		     //updateeee tele
 		    function updateContactTele(id){
 		    	var val = document.getElementById('tele').value;
 		    	$.ajax({
 					type: "POST",
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson="+id+"&Ctele="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
+					}
+				});
+		    }
+		     //updateeee fax
+		    function updateContactFax(id){
+		    	var val = document.getElementById('fax').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson="+id+"&Cfax="+val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?idPerson='+id;
+					}
+				});
+		    }
+		     //updateeee email
+		    function updateContactEmail(id){
+		    	var val = document.getElementById('email').value;
+		    	$.ajax({
+					type: "POST",
+					url: "updateSchoolFunction.php",
+					data: "idContactPerson="+id+"&Cemail="+val,
 					success: function(data){
 						window.location ='School_UpdateSchool.php?idPerson='+id;
 					}

@@ -317,7 +317,7 @@ $provinceResult = $connect->select($provinceQuery);
 									<legend class="text-bold">Contact Information</legend>
 									<div class="form-group">
 										<label><strong>Cellphone Number:</strong><span class="text-danger">*</span> </label>
-										<input id="txtContactNumber" name="txtContactNumber" required="required"="required="required"" class="form-control" data-mask="(+63) 999-999-9999" placeholder="(+63) 999-999-9999">
+										<input id="txtContactNumber" name="txtContactNumber" required="required" class="form-control" data-mask="(+63)999-999-9999" placeholder="(+63)999-999-9999">
 									</div>
 
 									<div class="form-group">

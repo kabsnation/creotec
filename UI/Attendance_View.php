@@ -21,7 +21,6 @@ include('../UI/header/header_admin.php');
 					<div class="page-header-content">
 						<div class="page-title">
 							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Attendance List</span> - View Attendance</h4>
-
 						</div>
 
 						<div class="heading-elements">
@@ -48,44 +47,73 @@ include('../UI/header/header_admin.php');
 								</div>
 
 								<div class="panel-body">
-									<div class="col-lg-12">
-										<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
 
-											<thead style="font-size: 13px;">
-												<tr>
-									                <th>Student Name</th>
-									                <th>Strand</th>
-									                <th style="width: 30%;">Date</th>
-									                <th>Time in</th>
-									                <th>Time out</th>
-									                <th class="text-center">Remarks</th>
-									            </tr>
-											</thead>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label><strong>Batch:</strong></label>
+													<select class="form-control"></select>
+												</div>
+											</div>
 
-											<tbody style="font-size: 12px;">
-												<?php if($results){
-													foreach($results as $result){
-													?>
-									            <tr>
-									                <td><?php echo $result['lastName'].', '.$result['firstName'] ;?></td>
-									                <td><?php echo $result['strand']?></td>
-									                <td><?php echo $result['date']?></td>
-									                <td><?php echo $result['time_in']?></td>
-									                <td><?php echo $result['time_out']?></td>
-													<td class="text-center">
-														<?php if($result['remarks'] =="PRESENT"){?>
-														<span class='label label-success'><?php echo $result['remarks'];?></span>
-														<?php } else {?>
-														<span class='label label-danger'><?php echo $result['remarks'];?></span>
-														<?php }?>
-													</td>
-									            </tr>
-									            <?php }}?>
-									          
-									        </tbody>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label><strong>School:</strong></label>
+													<select class="form-control"></select>
+												</div>
+											</div>
 
-										</table>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label><strong>Date:</strong></label>
+													<select class="form-control"></select>
+												</div>
+											</div>
+										</div>
 									</div>
+
+									<div class="row">
+										<div class="col-lg-12">
+											<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
+
+												<thead style="font-size: 13px;">
+													<tr>
+										                <th>Student Name</th>
+										                <th>Strand</th>
+										                <th style="width: 30%;">Date</th>
+										                <th>Time in</th>
+										                <th>Time out</th>
+										                <th class="text-center">Remarks</th>
+										            </tr>
+												</thead>
+
+												<tbody style="font-size: 12px;">
+													<?php if($results){
+														foreach($results as $result){
+														?>
+										            <tr>
+										                <td><?php echo $result['lastName'].', '.$result['firstName'] ;?></td>
+										                <td><?php echo $result['strand']?></td>
+										                <td><?php echo $result['date']?></td>
+										                <td><?php echo $result['time_in']?></td>
+										                <td><?php echo $result['time_out']?></td>
+														<td class="text-center">
+															<?php if($result['remarks'] =="PRESENT"){?>
+															<span class='label label-success'><?php echo $result['remarks'];?></span>
+															<?php } else {?>
+															<span class='label label-danger'><?php echo $result['remarks'];?></span>
+															<?php }?>
+														</td>
+										            </tr>
+										            <?php }}?>
+										          
+										        </tbody>
+
+											</table>
+										</div>
+									</div>
+
 								</div>
 							</div>
 						</div>

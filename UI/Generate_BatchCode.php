@@ -1,7 +1,12 @@
 <?php
+require_once('../config/config.php');
 require_once('../UI/SchoolHandler.php');
-$handler = new SchoolHandler();
-$resultSchool = $handler->getSchool();
+require_once('../UI/StrandHandler.php');
+$school = new SchoolHandler();
+$strand = new StrandHandler();
+$resultSchool = $school->getSchool();
+$resultCenter = $school->getCenter();
+$resultStrand = $strand->getStrand();
 ?>
 
 <html>
@@ -178,7 +183,10 @@ $resultSchool = $handler->getSchool();
 										<div class="form-group">
 							                <label>Center Location</label>
 							                <select class="form-control select2" style="width: 100%;">
-							                  <option></option>
+							                	<?php if($resultCenter){
+							                		foreach($resultCenter as $center){?>
+							                  <option value="<?php echo $center['idCenter']?>"><?php echo $center['centerName'];?></option>
+							                  <?php }}?>
 							                </select>
 							              </div>
 										<br/>
@@ -238,7 +246,13 @@ $resultSchool = $handler->getSchool();
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
 									<div class="col-lg-12">
-										
+										<div class="form-group">
+											<?php if($resultStrand){
+												foreach($resultStrand as $strand){?>
+												<label><?php echo $strand['strand'];?></label>
+												<input type="text" name="strand[]" class="form-control">
+												<?php }}?>
+										</div>
 									</div>
 								</div>
 							</fieldset>

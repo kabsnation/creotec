@@ -55,13 +55,13 @@
                                     <img class="image" src="assets/images/logo_light.png" style="width: 50%" /></div>
 	                                <h5 class="content-group">Login to your account</h5>
 	                                <div class="content-divider text-muted">
-	                                	<span><small class="display-block">Enter your Employee ID and Password</small></span>
+	                                	<span><small class="display-block">Enter your Username<!-- Employee ID --> and Password</small></span>
 		                            </div>
 	                                <br />
                             </div>
 
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="number" ID="employeeID" name="employeeID" class="form-control" Placeholder="Employee ID" required="required">
+                                <input type="text" ID="employeeID" name="employeeID" class="form-control" Placeholder="Username" required="required">
                                 <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div>

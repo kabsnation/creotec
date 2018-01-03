@@ -120,7 +120,7 @@ $provinceResult = $connect->select($provinceQuery);
 								</li>
 
 								<li>
-									<a href="#"><i class="icon-library"></i> <span>Center</span></a>
+									<a href="#"><i class="icon-library2"></i> <span>Center</span></a>
 									<ul>
 										<li class="active"><a href="AddCenter.php"><i class="icon-plus-circle2"></i> <span>Add Center</span></a></li>
 									</ul>
@@ -172,9 +172,38 @@ $provinceResult = $connect->select($provinceQuery);
 
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-lg-12">
+											<div class="col-lg-6 col-md-offset-3">
 												<div class="form-group">
-													
+													<legend class="text-semibold">Center Information </legend>
+													<label>Center Name:</label>
+													<input type="text" required="required" class="form-control">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-6 col-md-offset-3">
+												<div class="form-group">
+													<legend class="text-semibold">Address </legend>
+													<label>Province:</label>
+													<select class="form-control"></select>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-6 col-md-offset-3">
+												<div class="form-group">
+													<label>City / Municipality:</label>
+													<select class="form-control"></select>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-right">
+													<input type="button" value="Add Center" class="btn bg-primary"/>
 												</div>
 											</div>
 										</div>

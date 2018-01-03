@@ -174,11 +174,12 @@ $resultsGender= $connect -> select($queryGender);
 											<label class="control-label col-lg-5">School Name: <span class="text-danger">*</span></label>
 											<select id="txtSchoolName" name="txtSchoolName" required="required" class="form-control select">
 												<option></option>
-																		<?php
-																		foreach($resultsSchool as $resultSchool){
-																		?>
-																		<option value="<?php echo $resultSchool["idSchool"];?>"><?php echo $resultSchool['schoolName'];?></option>
-																		<?php }?>
+												<?php
+													foreach($resultsSchool as $school){
+
+												?>
+												<option value="<?php echo $school["idSchool"];?>"><?php echo $school['schoolName'];?></option>
+												<?php }?>
 											</select>
 										</div>
 									</div>
@@ -188,13 +189,6 @@ $resultsGender= $connect -> select($queryGender);
 											<label class="control-label col-lg-6">Choose your Strand: <span class="text-danger">*</span></label>
 											<select id="dropdownStrand" name="dropdownStrand" required="required" class="form-control select">
 												<option></option>
-												<?php
-												foreach($resultStrand as $strand){
-												?>
-												<option value='<?php echo $strand["idStrand"];?>'>
-													<?php echo $strand["strand"];?>
-												</option>
-												<?php }?>
 											</select> 
 										</div>
 									</div>

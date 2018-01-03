@@ -4844,11 +4844,11 @@ ul.dropdown-menu .dropdown-content-heading:first-child {
   background-color: #2196F3;
 }
 .label-success {
-  border-color: #49eb8e;
+  border-color: #4CAF50;
 }
 .label-success[href]:hover,
 .label-success[href]:focus {
-  background-color: #2ecc71;
+  background-color: #4CAF50;
 }
 .label-info {
   border-color: #00BCD4;
@@ -5787,7 +5787,7 @@ a.list-group-item-info:focus {
 }
 a.list-group-item-warning,
 button.list-group-item-warning {
-  color: #fda04d;
+  color: #EF6C00;
 }
 a.list-group-item-warning .list-group-item-heading,
 button.list-group-item-warning .list-group-item-heading {
@@ -5797,8 +5797,8 @@ a.list-group-item-warning:hover,
 button.list-group-item-warning:hover,
 a.list-group-item-warning:focus,
 button.list-group-item-warning:focus {
-  color: #fda04d;
-  background-color: #fda04d;
+  color: #EF6C00;
+  background-color: #ffe9c6;
 }
 a.list-group-item-warning.active,
 button.list-group-item-warning.active,

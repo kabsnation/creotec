@@ -158,7 +158,7 @@ $(function() {
             modal: modalTemplate
         },
         maxFilesNum: 10,
-        allowedFileExtensions: ["jpg", "png", "jpeg"],
+        allowedFileExtensions: ["jpg", "gif", "png", "txt"],
         initialCaption: "No file selected",
         previewZoomButtonClasses: previewZoomButtonClasses,
         previewZoomButtonIcons: previewZoomButtonIcons,

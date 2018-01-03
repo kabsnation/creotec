@@ -25,7 +25,7 @@ $(function() {
         }],
         dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
         language: {
-            search: '<span>Search:</span> _INPUT_',
+            search: '<span>Filter:</span> _INPUT_',
             lengthMenu: '<span>Show:</span> _MENU_',
             paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
         },
@@ -83,7 +83,10 @@ $(function() {
         columns: [
             {data: "name[, ]"},
             {data: "hr.0" },
-            {data: "office"}
+            {data: "office"},
+            {data: "extn"},
+            {data: "hr.2"},
+            {data: "hr.1"}
         ]
     });
 
@@ -113,7 +116,7 @@ $(function() {
     // ------------------------------
 
     // Add placeholder to the datatable filter option
-    $('.dataTables_filter input[type=search]').attr('placeholder','Type to search...');
+    $('.dataTables_filter input[type=search]').attr('placeholder','Type to filter...');
 
 
     // Enable Select2 select for the length option

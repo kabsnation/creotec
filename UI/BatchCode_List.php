@@ -1,4 +1,16 @@
-<?php include('../UI/header/header_admin.php'); ?>
+<?php 
+include('../UI/header/header_admin.php');
+include('../config/config.php');
+$con = new Connect();
+$conn = $con->connectDB();
+$query= "SELECT batch.idbatch, batchCode,centerName FROM batch JOIN center ON batch.idCenter = center.idCenter where markasdeleted = 0";
+$result = $con->select($query);
+if(isset($_GET['id'])){
+	$id = mysqli_real_escape_string($conn,stripcslashes(trim($_GET['id'])));
+	$querySchool = "SELECT batch.idbatch, batchCode,centerName, schoolName FROM batch JOIN center ON batch.idCenter = center.idCenter JOIN school_batch ON batch.idbatch = school_batch.idbatch JOIN school ON school_batch.idSchool = school.idSchool where batch.idbatch = ".$id." and batch.markasdeleted = 0";
+	$resultSchool = $con->select($querySchool);
+}
+?>
 			<!-- Main content -->
 			<div class="content-wrapper">
 				<!-- Page header -->
@@ -39,6 +51,21 @@
 										                <th class="text-center">Actions</th>
 										            </tr>
 												</thead>
+												
+												<tbody>
+													<?php if($result){
+														foreach($result as $res){?>
+														<tr>
+														<td><?php echo $res['batchCode'];?></td>
+														<td><?php echo $res['centerName'];?></td>
+														<td class="text-center">
+															<a href="BatchCode_List.php?id=<?php echo $res['idbatch'];?>" id="update" name="view" style="color: #2c3e50;"><i class="icon-eye" style="margin-right: 3px;"></i>View</a>
+															<!-- <a href="School_UpdateSchool.php?id=<?php echo $res['idbatch'];?>" id="update" name="update" style="color: #2980b9"><i class="icon-pencil" style="margin-right: 3px;"></i>Update</a> -->
+															<a href="#" name="sample" id="sample" style="color: #d35400;" onclick="promptDelete(<?php echo $res['idbatch'];?>)"><i class="icon-trash" style="margin-left: 5px; margin-right: 3px;"></i>Delete</a>
+														</td>
+														</tr>
+												<?php }}?>
+												</tbody>
 											</table>
 
 										</div>
@@ -66,14 +93,25 @@
 									<div class="col-lg-12">
 										<div class="row">
 
-											<table class="table datatable-html">
+											<table class="table datatable-html" id="table1">
 												<thead style="font-size: 13px;">
 													<tr>
+														<th>No.</th>
 										                <th>School</th>
-										                <th></th>
-										                <th class="text-center">Actions</th>
 										            </tr>
 												</thead>
+												<tbody>
+											<?php if(isset($resultSchool)){
+
+													$count = 1;
+												foreach ($resultSchool as $school) {
+												?>
+												<tr>
+													<td><?php echo $count?></td>
+													<td><?php echo $school['schoolName'];?></td>
+												</tr>
+												<?php $count++;}}?>
+												</tbody>
 											</table>
 
 										</div>
@@ -112,4 +150,47 @@
         	y.style.display = "block";
         }
 	}
+	<?php if(isset($_GET['id'])){?>
+		hideBatchCodePanel();
+	<?php }?>
+	$('#batchcode_table').DataTable( {
+			  "columnDefs": [ {
+				"targets": 2,
+				"orderable": false
+				} ]
+			} );
+	$('#table1').DataTable( {
+			  "columnDefs": [ {
+				"targets": 0,
+				"orderable": true
+				} ]
+			} );
+	 function promptDelete(val){
+		    	swal({
+			            title: "Are you sure?",
+			            text: "You will not be able to recover this information!",
+			            type: "warning",
+			            showCancelButton: true,
+			            confirmButtonColor: "#FF7043",
+			            confirmButtonText: "Delete",
+			            closeOnConfirm: true,
+			            closeOnCancel: true
+		        	},
+		        	function(isConfirm){
+		        		if(isConfirm){
+		        			deleteSchool(val);
+		        		}
+		        });
+		    }
+
+		    function deleteSchool(val){
+		    	$.ajax({
+				type: "POST",
+				url: "generateBatchCode.php",
+				data: 'id=' + val,
+					success: function(data){
+						window.location ='BatchCode_List.php';
+					}
+				});
+		    }
 </script>

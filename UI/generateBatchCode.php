@@ -22,12 +22,17 @@ if(isset($_POST['idschool'])){
 			for($i=0;$i< $arr ;$i++){
 				$query="INSERT INTO slots(idbatch,idStrand,capacity) VALUES(".$batchId.",".$_POST['idstrand'][$i].",".$_POST['capacity'][$i].")";
 				$result = $connect->insert($query);
-				if($result){
-					echo "Success";
-				}
 			}
+				if($result){
+					echo "<script>alert('Success! Batch Code: ".$batchCode."'); window.location='Generate_BatchCode.php';</script>";
+				}
 		}
 	}
+}
+else if(isset($_POST['id'])){
+	$con = new Connect();
+	$query = "UPDATE batch SET markasdeleted = 1 WHERE idbatch =".$_POST['id'];
+	$result = $con->insert($query);
 }
 
 ?>

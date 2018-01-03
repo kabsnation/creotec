@@ -11,21 +11,21 @@ $resultBatch = $connect->select($queryBatch);
 if(isset($_GET['idbatch'])&&isset($_GET['idstrand'])){
 	$idbatch = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idbatch'])));
 	$idstrand = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idstrand'])));
-	$queryAccount = "SELECT firstName, LastName, schoolName, strand, targetCourse, batchCode 
-	FROM accountinformation, applicants, batch, targetcourse, school, strand
+	$queryAccount = "SELECT idapplicant, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode 
+	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand
 	where applicants.idAccountInformation=accountinformation.idAccountInformation  
 	and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
 	and applicants.idtargetcourse=targetcourse.idtargetcourse 
-	and applicants.idSchool=school.idSchool and batch.idbatch= ".$idbatch. "  and applicants.idStrand = ".$idstrand." ORDER BY applicants.idAccountInformation";
+	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and batch.idbatch= ".$idbatch. "  and applicants.idStrand = ".$idstrand." ORDER BY applicants.idAccountInformation";
 }
 else{
 	foreach ($resultBatch as $batch) {
-		$queryAccount = "SELECT firstName, LastName, schoolName, strand, targetCourse, batchCode 
-		FROM accountinformation, applicants, batch, targetcourse, school, strand
-		where applicants.idAccountInformation=accountinformation.idAccountInformation  
-		and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
-		and applicants.idtargetcourse=targetcourse.idtargetcourse 
-		and applicants.idSchool=school.idSchool and batch.idbatch= ".$batch['idbatch']. " ORDER BY applicants.idAccountInformation";	
+		$queryAccount = "SELECT idapplicant, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode 
+	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand
+	where applicants.idAccountInformation=accountinformation.idAccountInformation  
+	and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
+	and applicants.idtargetcourse=targetcourse.idtargetcourse 
+	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and batch.idbatch= ".$batch['idbatch']. " ORDER BY applicants.idAccountInformation";	
 		break;
 	}
 }
@@ -34,6 +34,7 @@ $resultStrand = $connect->select($queryStrand);
 $resultsAccount= $connect->select($queryAccount);
 include('../UI/header/header_admin.php');
 ?>
+<form action="printMasterlist.php" method="POST">
 			<!-- Main content -->
 			<div class="content-wrapper">
 				<!-- Page header -->
@@ -45,7 +46,7 @@ include('../UI/header/header_admin.php');
 
 						<div class="heading-elements">
 							<div class="heading-btn-group">
-								<a class="btn btn-link btn-float has-text"><i class=" icon-printer text-info" onclick="printAttendance()"></i><span>Print</span></a>
+								<input type="submit" name="" value="Print" class="btn btn-primary">
 							</div>
 						</div>
 
@@ -111,10 +112,10 @@ include('../UI/header/header_admin.php');
 
 										<thead style="font-size: 14px;">
 											<tr>
-								                <th>Batch Code</th>
+								                <th>Trainee ID</th>
 								                <th>Name</th>
 								                <th>School</th>
-								                <th>Strand</th>
+								                <th>Gender</th>
 								                <th>Target Course</th>
 								            </tr>
 										</thead>
@@ -123,11 +124,13 @@ include('../UI/header/header_admin.php');
 										<?php foreach($resultsAccount as $result){
 												?>
 								            <tr>
-								                <td><?php echo $result['batchCode'];?></td>
-								                <td><?php echo $result['LastName'].', '.$result['firstName'] ;?></td>
-								                <td><?php echo $result['schoolName'];?></td>
-								                <td><?php echo $result['strand'];?></td>
-								                <td><?php echo $result['targetCourse'];?></td>
+								            	<input type="hidden" name="batchNumber" value="<?php echo $result['idbatch'];?>">
+								            	<input type="hidden" name="strand" value="<?php echo $result['strand'];?>">
+								                <td><input type="hidden" name="id[]" value="<?php echo $result['idapplicant'];?>"><?php echo $result['idapplicant'];?></td>
+								                <td><input type="hidden" name="name[]" value="<?php echo $result['LastName'].', '.$result['firstName'].' '.$result['middleName'] ;?>"><?php echo $result['LastName'].', '.$result['firstName'].' '.$result['middleName'] ;?></td>
+								                <td><input type="hidden" name="schoolName[]" value="<?php echo $result['schoolName'];?>"><?php echo $result['schoolName'];?></td>
+								                <td><input type="hidden" name="gender[]" value="<?php echo $result['genderName'];?>"><?php echo $result['genderName'];?></td>
+								                <td><input type="hidden" name=""><?php echo $result['targetCourse'];?></td>
 												
 								            </tr>
 								            <?php }?>
@@ -147,7 +150,7 @@ include('../UI/header/header_admin.php');
 
 			</div>
 			<!-- /Main content -->
-
+</form>
 		</div>
 		<!-- Page content -->
 	</div>

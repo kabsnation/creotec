@@ -63,11 +63,7 @@ include('../UI/header/header_admin.php');
 
 												<div class="form-group">
 													<label><strong>Province:</strong><span class="text-danger">*</span> </label>
-<<<<<<< HEAD
-													<select type="text" class="form-control select" onchange="getCity(this.value)" required="required"/>
-=======
 													<select type="text" class="form-control select"  required="required" onchange="getCity(this.value)"/>
->>>>>>> 5469a8f023c6d5f1a33d7c767785175d541f20c3
 													<option value=""></option>
 														<?php foreach($provinceResult as $province){?>
 														<option value="<?php echo $province['idProvince'];?>"><?php echo $province['provinceName'];?></option>
@@ -77,11 +73,7 @@ include('../UI/header/header_admin.php');
 
 												<div class="form-group">
 													<label><strong>City / Municipality:</strong><span class="text-danger">*</span> </label>
-<<<<<<< HEAD
 													<select type="text" name="city" id="city" class="form-control select" required="required"/></select> 
-=======
-													<select type="text" name="city" id="city"  required="required" class="form-control select" /></select> 
->>>>>>> 5469a8f023c6d5f1a33d7c767785175d541f20c3
 												</div>
 
 												<!-- <legend class="text-bold">Contact Person Details</legend>

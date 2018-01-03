@@ -1,12 +1,13 @@
  <?php
 require_once("../config/config.php");
 $connect = new Connect();
+$con = $connect->connectDB();
 $slots = array();
 $result = "";
 if(!empty($_POST["batchcode"]))
 {
-	$id = $_POST["batchcode"];
-	$query = "SELECT batchcode, capacity, (select count(*) as count from applicants as a WHERE a.idbatch = batch.idbatch AND a.idstrand = strand.idstrand) as counter, strand, strand.idStrand FROM slots JOIN strand ON strand.idstrand = slots.idstrand JOIN batch ON batch.idbatch = slots.idbatch WHERE batch.batchcode = BINARY '".$id."'";
+	$id = mysqli_real_escape_string($con,stripcslashes(trim($_POST["batchcode"])));
+	$query = "SELECT batchcode, capacity, (select count(*) as count from applicants as a WHERE a.idbatch = batch.idbatch AND a.idstrand = strand.idstrand) as counter, strand, strand.idStrand FROM slots JOIN strand ON strand.idstrand = slots.idstrand JOIN batch ON batch.idbatch = slots.idbatch WHERE batch.batchcode = BINARY '".$id."' and markasdeleted =0";
 	$r =array();
 	$result = $connect->select($query);
 	$count = 0;

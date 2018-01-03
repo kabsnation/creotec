@@ -9,7 +9,7 @@ $provinceResult = $connect->select($provinceQuery);
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Add Center`</title>
+	<title>Add Center</title>
 
 	<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
 
@@ -120,7 +120,7 @@ $provinceResult = $connect->select($provinceQuery);
 								</li>
 
 								<li>
-									<a href="#"><i class="icon-library2"></i> <span>Center</span></a>
+									<a href="#"><i class="icon-city"></i> <span>Center</span></a>
 									<ul>
 										<li class="active"><a href="AddCenter.php"><i class="icon-plus-circle2"></i> <span>Add Center</span></a></li>
 									</ul>

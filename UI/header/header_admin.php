@@ -15,7 +15,8 @@ if(strpos($_SERVER['REQUEST_URI'],'School_AddSchool.php')){
 	$arr[3] ='';
 	$arr[4] ='';
 	$arr[5]='';
-	$arr[6]=$scripts;
+	$arr[6]='';
+	$arr[7]=$scripts;
 }
 else if(strpos($_SERVER['REQUEST_URI'],'School_ManageAddressBook.php')){
 	$arr[0] = 'Manage School';
@@ -24,7 +25,8 @@ else if(strpos($_SERVER['REQUEST_URI'],'School_ManageAddressBook.php')){
 	$arr[3] ='';
 	$arr[4] ='';
 	$arr[5]='';
-	$arr[6]=$scripts;
+	$arr[6]='';
+	$arr[7]=$scripts;
 }
 else if(strpos($_SERVER['REQUEST_URI'],'Student_ManageStudent.php')){
 	$arr[0] = 'Manage Students';
@@ -33,7 +35,8 @@ else if(strpos($_SERVER['REQUEST_URI'],'Student_ManageStudent.php')){
 	$arr[3] ='active';
 	$arr[4] ='';
 	$arr[5]='';
-	$arr[6]=$scripts;
+	$arr[6]='';
+	$arr[7]=$scripts;
 }
 else if(strpos($_SERVER['REQUEST_URI'] ,'Attendance_View.php')){
 	$arr[0] = 'Students Attendance';
@@ -42,7 +45,8 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'Attendance_View.php')){
 	$arr[3] ='';
 	$arr[4] ='active';
 	$arr[5]='';
-	$arr[6]=$scripts;
+	$arr[6]='';
+	$arr[7]=$scripts;
 
 }
 else if(strpos($_SERVER['REQUEST_URI'] ,'School_UpdateSchool.php')){
@@ -52,7 +56,8 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'School_UpdateSchool.php')){
 	$arr[3] ='';
 	$arr[4] ='';
 	$arr[5]='';
-	$arr[6]=$scripts;
+	$arr[6]='';
+	$arr[7]=$scripts;
 
 }
 else if(strpos($_SERVER['REQUEST_URI'] ,'Generate_BatchCode.php')){
@@ -62,7 +67,8 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'Generate_BatchCode.php')){
 	$arr[3] ='';
 	$arr[4] ='';
 	$arr[5]='active';
-	$arr[6] ='<script type="text/javascript" src="assets/js/plugins/forms/wizards/stepy.min.js"></script>
+	$arr[6] ='';
+	$arr[7] ='<script type="text/javascript" src="assets/js/plugins/forms/wizards/stepy.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
 	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>
@@ -81,6 +87,16 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'Generate_BatchCode.php')){
 	<script type="text/javascript" src="assets/js/pages/picker_date.js"></script>
 	<script type="text/javascript" src="assets/js/pages/uploader_bootstrap.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/uploaders/fileinput.min.js"></script>';
+}
+else if(strpos($_SERVER['REQUEST_URI'] ,'BatchCode_List.php')){
+	$arr[0] = 'Batch Code List';
+	$arr[1] = '';
+	$arr[2] = '';
+	$arr[3] ='';
+	$arr[4] ='';
+	$arr[5] ='';
+	$arr[6]='active';
+	$arr[7] =$scripts;
 }
 ?>
 <html>
@@ -109,7 +125,7 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'Generate_BatchCode.php')){
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
-	<?php echo $arr[6]?>
+	<?php echo $arr[7]?>
 	<!-- /theme JS files -->
 </head>
 <body>
@@ -190,10 +206,20 @@ else if(strpos($_SERVER['REQUEST_URI'] ,'Generate_BatchCode.php')){
 									
 								</li>
 
-								<li class="<?php echo $arr[5];?>">
-									<a href="Generate_BatchCode.php"><i class="icon-cogs"></i> <span>Generate Batch Code</span></a>
-									
+								<li>
+									<a href="#"><i class="icon-vcard"></i> <span>Batch Code</span></a>
+									<ul>
+										<li class="<?php echo $arr[5];?>">
+											<a href="Generate_BatchCode.php"><i class="icon-cogs"></i> <span>Generate Batch Code</span></a>
+										</li>
+
+										<li class="<?php echo $arr[6];?>">
+											<a href="BatchCode_List.php"><i class="icon-menu2"></i><span>Batch Code List</span></a>
+										</li>
+									</ul>
 								</li>
+
+								
 
 
 							</ul>

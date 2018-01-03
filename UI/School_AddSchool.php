@@ -63,7 +63,11 @@ include('../UI/header/header_admin.php');
 
 												<div class="form-group">
 													<label><strong>Province:</strong><span class="text-danger">*</span> </label>
+<<<<<<< HEAD
+													<select type="text" class="form-control select" onchange="getCity(this.value)" required="required"/>
+=======
 													<select type="text" class="form-control select"  required="required" onchange="getCity(this.value)"/>
+>>>>>>> 5469a8f023c6d5f1a33d7c767785175d541f20c3
 													<option value=""></option>
 														<?php foreach($provinceResult as $province){?>
 														<option value="<?php echo $province['idProvince'];?>"><?php echo $province['provinceName'];?></option>
@@ -73,7 +77,11 @@ include('../UI/header/header_admin.php');
 
 												<div class="form-group">
 													<label><strong>City / Municipality:</strong><span class="text-danger">*</span> </label>
+<<<<<<< HEAD
+													<select type="text" name="city" id="city" class="form-control select" required="required"/></select> 
+=======
 													<select type="text" name="city" id="city"  required="required" class="form-control select" /></select> 
+>>>>>>> 5469a8f023c6d5f1a33d7c767785175d541f20c3
 												</div>
 
 												<!-- <legend class="text-bold">Contact Person Details</legend>
@@ -108,27 +116,28 @@ include('../UI/header/header_admin.php');
 										<div class="col-lg-12">
 											<fieldset class="content-group">
 												<legend class="text-bold">Add School Contact Person</legend>
-												<div class="text-right">
-													<button type="button" class="btn btn-default" data-target="#modal_AddContactPerson" data-toggle="modal"><i class="icon-phone-plus2 position-left"></i>Add</button>
+
+												<div class="col-lg-12" style="margin-bottom: 10px">
+													<div class="text-right">
+														<button type="button" class="btn btn-default" data-target="#modal_AddContactPerson" data-toggle="modal"><i class="icon-phone-plus2 position-left"></i>Add</button>
+													</div>
 												</div>
-
 												
-
-												<table class="table datatable-html" style="font-size: 13px; width: 100%" name="table1" id="table1">
-
-													<thead style="font-size: 13px;">
-														<tr>
-											                <th>Name</th>
-											                <th>Designation</th>
-											                <th>Cellphone Number</th>
-											                <th>Telephone Number</th>
-											                <th>Fax Number</th>
-											                <th>Email Address</th>
-											                <th class="text-center">Actions</th>
-											            </tr>
-													</thead>
-												</table>
-
+												<div class="col-lg-12">
+													<table class="table datatable-html" style="font-size: 13px;" name="table1" id="table1">
+														<thead style="font-size: 13px;">
+															<tr>
+												                <th>Name</th>
+												                <th>Designation</th>
+												                <th>Cellphone Number</th>
+												                <th>Telephone Number</th>
+												                <th>Fax Number</th>
+												                <th>Email Address</th>
+												                <th class="text-center">Actions</th>
+												            </tr>
+														</thead>
+													</table>
+												</div>
 											</fieldset>
 										</div>
 

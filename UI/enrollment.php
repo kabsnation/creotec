@@ -72,55 +72,121 @@ $resultsGender= $connect -> select($queryGender);
 						<div class="panel-heading">
 							<div class="text-center">
 								<h2 class="panel-title">Application Form</h6>
-								<button class="btn btn-primary" data-toggle="modal" data-target="#preview"></button>
+								
 							</div>
 						</div>
 
 	                	<form class="stepy-validation" action="enrollmentFunction.php" method="POST" enctype="multipart/form-data">
 	                		<input name="batchcode" id="batchcode"  type="hidden" required class="form-control" value="<?php echo $batchcode ?>">
 							<fieldset title="1">
-								<legend class="text-semibold">Picture </legend>
+								<legend class="text-semibold">Picture <br />
+
+								 </legend>
 								<div class="row">
 									<div class="col-lg-6 col-md-offset-3">
-										<label class="control-label col-lg-12">Upload your picture:<span class="text-danger">*</span></label>
+										<label class="control-label col-lg-12">Upload your picture:
+											<span class="text-danger">*</span> <br />
+
+										</label>
 										<br/>
 										<input type="file" id="wizard-picture" name="wizard-picture" accept="image/*" required="required" class="file-input"  data-show-remove="false" data-show-caption="false" data-show-upload="false" data-browse-class="btn btn-primary btn-block">
 										<br/>
+
 									</div>
+									<div class="control-label col-lg-12"><center>Note: The size of the photo should be 1 x1.</center></div>
+
 								</div>
 							</fieldset>
+
 
 							<fieldset title="2">
 								<legend class="text-semibold">General Information</legend>
 								<div class="row">
-									<div class="col-lg-12"><legend class="text-bold">Name</legend></div>
-									<div class="col-md-4">
+									<div class="col-lg-4"><legend class="text-bold">Name</legend>
+									
+									
 											<div class="form-group">
-												<label class="control-label col-lg-4">Last Name:<span class="text-danger">*</span></label>
+												<label class="control-label">Last Name:<span class="text-danger">*</span></label>
 												<input id="txtLastName" name="txtLastName" required="required" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
-										</div>
+										
 
-										<div class="col-md-4">
+										
 											<div class="form-group">
-												<label class="control-label col-lg-4">First Name:<span class="text-danger">*</span></label>
+												<label class="control-label ">First Name:<span class="text-danger">*</span></label>
 												<input id="txtFirstName" name="txtFirstName" required="required" type="text" class="form-control" required onkeyup="validname(this)">
 											</div>
-										</div>
+										
 
-										<div class="col-md-4">
+										
 											<div class="form-group">
-												<label class="control-label col-lg-4">Middle Name:</label>
+												<label class="control-label ">Middle Name:</label>
 												<input id="txtMiddleName" name="txtMiddleName" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
-										</div>
-								</div>
-
-								<div class="row">
-									<div class="col-lg-12"><legend class="text-bold">Address</legend></div>
 									
-									<div class="col-md-4">
-										<div class="form-group">
+									<legend class="text-bold">Personal Information</legend>
+										<div class="content-group-md col-md-6">
+											<label class="control-label">Birthdate: <span class="text-danger">*</span></label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
+											</div>
+										</div>
+									
+
+									<div class="content-group-md col-md-6">
+										<label class="control-label">Gender: <span class="text-danger">*</span></label>
+										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select  ">
+											<option></option>
+																		<?php foreach($resultsGender as $result) {?>
+																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
+																		<?php }?>
+																		</select>
+										</select>
+									</div>
+										
+									<div class="content-group-md col-md-6">
+										<label class="control-label ">Nationality: <span class="text-danger">*</span></label>
+										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
+											<option></option>
+																		<?php foreach($resultsNationality as $result){?>
+																		<option value="<?php echo $result['idnationality'];?>">
+																			<?php echo $result['nationality']?>
+																		</option>
+																		<?php }?>
+										</select>
+									</div>
+
+									<div class="content-group-md col-md-6">
+										<label class="control-label">Religion: <span class="text-danger">*</span></label>
+										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
+											<option></option>
+																		<?php foreach($resultsReligion as $result) {?>
+																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
+																		<?php }?>
+																		</select>
+										</select>
+									</div>
+								
+									</div>
+								
+									<div class="col-lg-4">
+										<legend class="text-bold">Contact Information</legend>
+										<div class="content-group-md col-md-6">
+										<label class="control-label">Contact Number: <span class="text-danger">*</span></label>
+										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
+										</div>
+										<div class="content-group-md col-md-6">
+										<label class="control-label">Email Address: <span class="text-danger">*</span></label>
+										<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
+										<br />
+										</div>
+
+
+										<legend class="text-bold">Address</legend>
+									
+									
+										<div class="form-group col-md-6">
 											<label class="control-label col-lg-3">Province:<span class="text-danger">*</span></label>
 											<select id="dropdownProvince" name="dropdownProvince" required="required" class="form-control select" onchange="getCity(this.value)">
 												<option></option>
@@ -133,46 +199,42 @@ $resultsGender= $connect -> select($queryGender);
 												?>
 											</select> 
 										</div>
-									</div>
-
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label col-lg-6">City / Municipality:<span class="text-danger">*</span></label>
+									
+									
+										<div class="form-group col-md-6">
+											<label class="control-label">City / Municipality:<span class="text-danger">*</span></label>
 											<select id="dropdownCity" name="dropdownCity" required="required" class="form-control select"> 
 											</select> 
 										</div>
-									</div>
+									
 
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label col-lg-3">Barangay:<span class="text-danger">*</span></label>
+									
+										<div class="form-group col-md-6">
+											<label class="control-label ">Barangay:<span class="text-danger">*</span></label>
 											<input id="txtBarangay" name="txtBarangay" required="required" type="text" class="form-control" onkeyup="validadd(this)">
 										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="control-label col-lg-3">Subdivision / Village:</label>
+									
+								
+								
+										<div class="form-group col-md-6">
+											<label class="control-label">Subdivision / Village:</label>
 											<input type="text" class="form-control" id="txtSubdivision" name="txtSubdivision" onkeyup="validadd(this)">
 										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="control-label col-lg-6">House No./ Building No./ St./ Block / Lot</label>
+									
+									
+										<div class="form-group col-md-12">
+											<label class="control-label ">House No./ Building No./ St./ Block / Lot</label>
 											<input type="text" class="form-control" id="txtSubdivisionBlock" name="txtSubdivisionBlock" onkeyup="validadd(this)">
 										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-lg-12"><legend class="text-bold">School</legend></div>
+										</div>
+									
+							
+								
+									<div class="col-lg-4"><legend class="text-bold">School</legend></div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label col-lg-5">School Name: <span class="text-danger">*</span></label>
-											<select id="txtSchoolName" name="txtSchoolName" required="required" class="form-control select">
+											<select id="txtSchoolName" required="required" name="txtSchoolName" class="form-control select">
 												<option></option>
 												<?php
 													foreach($resultsSchool as $school){
@@ -187,7 +249,7 @@ $resultsGender= $connect -> select($queryGender);
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label col-lg-6">Choose your Strand: <span class="text-danger">*</span></label>
-											<select id="dropdownStrand" name="dropdownStrand" required="required" class="form-control select">
+											<select id="dropdownStrand" required="required" name="dropdownStrand" class="form-control select">
 												<option></option>
 											</select> 
 										</div>
@@ -205,102 +267,33 @@ $resultsGender= $connect -> select($queryGender);
 										</div>
 									</div>
 
-								</div>
+								
 							</fieldset>
+
+							
 
 							<fieldset title="3">
-								<legend class="text-semibold">Personal Information</legend>
-								<div class="row" style="margin-bottom: 20px;">
-
-									<div class="col-md-3">
-										<div class="content-group-md">
-											<label class="control-label">Birthdate: <span class="text-danger">*</span></label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Gender: <span class="text-danger">*</span></label>
-										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsGender as $result) {?>
-																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Contact Number: <span class="text-danger">*</span></label>
-										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Email Address: <span class="text-danger">*</span></label>
-										<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
-									</div>
-								</div>
-
-								<div class="row" style="margin-bottom: 20px;">
-									<div class="col-md-6">
-										<label class="control-label col-lg-6">Nationality: <span class="text-danger">*</span></label>
-										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsNationality as $result){?>
-																		<option value="<?php echo $result['idnationality'];?>">
-																			<?php echo $result['nationality']?>
-																		</option>
-																		<?php }?>
-										</select>
-									</div>
-
-									<div class="col-md-6">
-										<label class="control-label col-lg-4">Religion: <span class="text-danger">*</span></label>
-										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsReligion as $result) {?>
-																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
-								</div>
-							</fieldset>
-
-							<fieldset title="4">
 								<legend class="text-semibold">Guardian Information</legend>
-								<div class="row">
-									<div class="col-lg-12"><legend class="text-bold">Guardian Name</legend></div>
-									
-									<div class="col-md-4">
+								
+									<div class="col-lg-6"><legend class="text-bold">Guardian Name</legend>
 											<div class="form-group">
-												<label class="control-label col-lg-3">Last Name:<span class="text-danger">*</span></label>
+												<label class="control-label ">Last Name:<span class="text-danger">*</span></label>
 												<input id="txtGlastName" name="txtGlastName" required="required" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
-										</div>
-
-										<div class="col-md-4">
+										
 											<div class="form-group">
-												<label class="control-label col-lg-3">First Name:<span class="text-danger">*</span></label>
+												<label class="control-label ">First Name:<span class="text-danger">*</span></label>
 												<input id="txtGfirstName" name="txtGfirstName" required="required" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
-										</div>
-
-										<div class="col-md-4">
+										
 											<div class="form-group">
-												<label class="control-label col-lg-4">Middle Name:</label>
+												<label class="control-label ">Middle Name:</label>
 												<input id="txtGmiddleName" name="txtGmiddleName" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
-										</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label col-lg-6">Relationship: <span class="text-danger">*</span></label>
+										
+									<legend class="text-semibold">Personal Information</legend>
+											<div class="form-group col-md-6">
+												<label class="control-label ">Relationship: <span class="text-danger">*</span></label>
 												<select id="dropdownRelationship" name="dropdownRelationship" required="required" class="form-control select">
 													<option></option>
 																		
@@ -311,29 +304,21 @@ $resultsGender= $connect -> select($queryGender);
 																		<?php }?>
 												</select>
 											</div>
-										</div>
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="control-label col-lg-6">Contact Number:<span class="text-danger">*</span></label>
+										
+											<div class="form-group col-md-6">
+												<label class="control-label ">Contact Number:<span class="text-danger">*</span></label>
 												<input id="gContactNumber" name="gContactNumber" required="required" type="text" class="form-control" data-mask="(+63) 999-999-9999">
-											</div>
-										</div>
-
-										<div class="col-md-4">
+											</div>	
 											<div class="form-group">
-												<label class="control-label col-lg-6">Email Address:</label>
+												<label class="control-label col-md-12">Email Address:</label>
 												<input id="txtGemailAddress" name="txtGemailAddress" required="required" type="email" class="form-control">
-											</div>
-										</div>
+										</div>	
 								</div>
-
-								<div class="row">
-									<div class="col-lg-12"><legend class="text-bold">Address</legend></div>
-									
-									<div class="col-md-4">
+								<div class="col-lg-6">
+										
+										<legend class="text-bold">Address</legend>
 										<div class="form-group">
-											<label class="control-label col-lg-3">Province:<span class="text-danger">*</span></label>
+											<label class="control-label">Province:<span class="text-danger">*</span></label>
 											<select id="dropdownGprovince" name="dropdownGprovince" required="required" class="form-control select" onchange="getCity1(this.value)">
 																		<option></option>
 																		<?php
@@ -346,39 +331,34 @@ $resultsGender= $connect -> select($queryGender);
 																			}
 																		?></select> 
 										</div>
-									</div>
-
-									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label col-lg-6">City / Municipality:<span class="text-danger">*</span></label>
+											<label class="control-label ">City / Municipality:<span class="text-danger">*</span></label>
 											<select id="dropdownCity1" name="dropdownCity1" required="required" class="form-control select"></select> 
 										</div>
-									</div>
-
-									<div class="col-md-4">
+									
 										<div class="form-group">
-											<label class="control-label col-lg-3">Barangay:<span class="text-danger">*</span></label>
+											<label class="control-label ">Barangay:<span class="text-danger">*</span></label>
 											<input id="txtGbarangay" name="txtGbarangay" type="text" class="form-control" onkeyup="validadd(this)">
 										</div>
-									</div>
-								</div>
+									
+								
 
-								<div class="row">
-									<div class="col-md-6">
 										<div class="form-group">
-											<label class="control-label col-lg-3">Subdivision / Village:</label>
+											<label class="control-label ">Subdivision / Village:</label>
 											<input id="txtGsubdivision" name="txtGsubdivision" type="text" class="form-control" onkeyup="validadd(this)">
 										</div>
-									</div>
-
-									<div class="col-md-6">
+									
 										<div class="form-group">
-											<label class="control-label col-lg-6">House No./ Building No./ St./ Block / Lot</label>
+											<label class="control-label ">House No./ Building No./ St./ Block / Lot</label>
 											<input id="txtGsubdivisionBlock" name="txtGsubdivisionBlock" type="text" class="form-control" onkeyup="validadd(this)">
 										</div>
 									</div>
-								</div>
+								
+								
 
+								
+									
+								
 							</fieldset>
 							<button id="btnSubmit" name="btnSubmit" type="submit" class="btn btn-primary stepy-finish">Submit <i class="icon-check position-right"></i></button>
 						</form>
@@ -395,27 +375,6 @@ $resultsGender= $connect -> select($queryGender);
 		<!-- Page content -->
 	</div>
 	<!-- Page container -->
-
-	<!-- Preview -->
-	<div id="preview" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header bg-brown">
-					<h6 class="modal-title">Custom header color</h6>
-				</div>
-
-				<div class="modal-body">
-					<h6 class="text-semibold">Text in a modal</h6>
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn bg-brown">Done</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Preview -->
 
 </body>
 

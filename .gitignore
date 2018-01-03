@@ -6,3 +6,6 @@ config/config.php
 config/config.php
 config/config.php
 UI/enrollment.php
+UI/Generate_BatchCode.php
+config/config.php
+config/config.php

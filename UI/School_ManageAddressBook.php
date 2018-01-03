@@ -1,4 +1,5 @@
 <?php
+include('../config/config.php');
 include('../UI/SchoolHandler.php');
 $handler = new SchoolHandler();
 $results = $handler->getSchool();

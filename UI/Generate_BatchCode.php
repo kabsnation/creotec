@@ -39,11 +39,8 @@ include('../UI/header/header_admin.php');
 									<div class="col-lg-6 col-md-offset-3">
 										<div class="form-group">
 							                <label>Center Location</label>
-<<<<<<< HEAD
-							                <select class="form-control select2" name="center" style="width: 100%;">
-=======
-							                <select class="form-control select2" required="required" style="width: 100%;">
->>>>>>> 36d05f837e7a7ef3cd9e761ad22cc612636ce2dd
+							                <select class="form-control select2" name="center"  required="required" style="width: 100%;">
+
 							                	<?php if($resultCenter){
 							                		foreach($resultCenter as $center){?>
 							                  <option value="<?php echo $center['idCenter']?>"><?php echo $center['centerName'];?></option>
@@ -69,13 +66,13 @@ include('../UI/header/header_admin.php');
 						    	</div>
 
 								</div>
-
+								<input type="text" id="checker" class="label" disabled="true" required="required" name="">
 								<div class="panel-body">
 									<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
 
 										<thead style="font-size: 13px;">
 											<tr>
-												<th style="width: 5%;"><input type="checkbox" name="" id="select-all"></th>
+												<th style="width: 5%;"><input type="checkbox" onchange="addToHidden(this)" name="" id="select-all"></th>
 								                <th>School Name</th>
 								                <th>Location</th>
 								            </tr>
@@ -86,7 +83,7 @@ include('../UI/header/header_admin.php');
 												foreach($resultSchool as $result){
 												?>
 								            <tr>
-								            	<td> <input type="checkbox" name="idschool[]" value="<?php echo $result['idSchool'];?>" id="idschool"></td>
+								            	<td> <input type="checkbox" name="idschool[]" onchange="addToHidden(this)" value="<?php echo $result['idSchool'];?>" id="idschool"></td>
 								                <td><?php echo $result['schoolName'];?></td>
 								                <td><?php echo $result['cityName'].", ".$result['provinceName'];?></td>
 								            </tr>
@@ -182,5 +179,13 @@ include('../UI/header/header_admin.php');
                 });
             counter = 0;
             }
-});
+	});
+	function addToHidden(checkbox){
+		if(checkbox.checked == true){
+			document.getElementById('checker').value='true';
+		}
+		else{
+			document.getElementById('checker').value=null;
+		}
+	}
 </script>

@@ -111,7 +111,7 @@
 				<div class="page-header page-header-default">
 					<div class="page-header-content">
 						<div class="page-title">
-							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">News & Announcements</span> - Publish News</h4>
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">News & Announcements</span> - Timeline</h4>
 						</div>
 					</div>
 				</div>
@@ -134,6 +134,7 @@
                 </div>
               </div>
             </div>
+
             <div class="single_stuff wow fadeInDown">
               <div class="single_stuff_img"> <a href="#"><img src="assets/images/stuff_img1.jpg" alt=""></a> </div>
               <div class="single_stuff_article">
@@ -145,6 +146,7 @@
                 </div>
               </div>
             </div>
+
             <div class="single_stuff wow fadeInDown">
               <div class="single_stuff_img"> <a href="#"><img src="assets/images/stuff_img1.jpg" alt=""></a> </div>
               <div class="single_stuff_article">

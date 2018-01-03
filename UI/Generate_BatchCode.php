@@ -245,14 +245,16 @@ $resultStrand = $strand->getStrand();
 							<fieldset title="3">
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<?php if($resultStrand){
-												foreach($resultStrand as $strand){?>
+									<div class="col-lg-6 col-md-offset-3">
+										<?php if($resultStrand){
+											foreach($resultStrand as $strand){?>
+											<div class="form-group">
+										
 												<label><?php echo $strand['strand'];?></label>
 												<input type="text" name="strand[]" class="form-control">
-												<?php }}?>
-										</div>
+												
+											</div>
+										<?php }}?>
 									</div>
 								</div>
 							</fieldset>

@@ -1,86 +1,84 @@
+<?php include('../UI/header/header_admin.php'); ?>
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Page header -->
+				<div class="page-header page-header-default">
+					<div class="page-header-content">
+						<div class="page-title">
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Batch Code</span> - Batch Code List </h4>
+						</div>
+
+						<div class="heading-elements">
+						</div>
+
+					</div>
+				</div>
+				<!-- /page header -->
+
 				<!-- Content area -->
 				<div class="content">
 					
 					<div class="row">
 						<div class="col-lg-12">
 
-							<div class="panel panel-flat">
+							<div class="panel panel-flat" id="batchcodelist" name="batchcodelist">
 								<div class="panel-heading">
-									<h5 class="panel-title">Student Masterlist</h5>
+									<h5 class="panel-title">Batch Codes List</h5>
 								</div>
 
 								<div class="panel-body">
+
 									<div class="col-lg-12">
 										<div class="row">
 
-											<div class="col-lg-3">
-												<div class="form-group">
-													<label>Batch: </label>					                 
-													<select class="form-control" id="batch" name="batch" onchange="getMasterlist(this.value,strand.value);">
-														<?php $tempo;
-															foreach($resultBatch as $batch){
-																if($tempo != $batch['idbatch']){
-																	$tempo = $batch['idbatch'];
-																	if($idbatch==$batch['idbatch']){
-															?>
-															<option value="<?php echo $batch['idbatch'];?>" selected><?php echo $batch['idbatch'];?></option>
-															<?php }else {?>
-															<option value="<?php echo $batch['idbatch'];?>"><?php echo $batch['idbatch'];?></option>
-															<?php }}}?>
-									                </select>
-									            </div>
-											</div>
+											<table class="table datatable-html" name="batchcode_table" id="batchcode_table">
+												<thead style="font-size: 13px;">
+													<tr>
+										                <th>Batch Code</th>
+										                <th>Center Name</th>
+										                <th class="text-center">Actions</th>
+										            </tr>
+												</thead>
+											</table>
 
-											<div class="col-lg-3">
-												<div class="form-group">
-													<label>Strand: </label>
-									                <select class="form-control" id="strand" name="strand" onchange="getMasterlist(batch.value,this.value);">
-														<?php
-															foreach($resultStrand as $strand){
-																if($idstrand==$strand['idStrand']){
-															?>
-															<option value="<?php echo $strand['idStrand'];?>" selected><?php echo $strand['strand']?></option>
-															<?php }
-															else{?>
-															<option value="<?php echo $strand['idStrand'];?>"><?php echo $strand['strand']?></option>
-															<?php }}?>
-									                </select>
-												</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+
+							<div class="panel panel-flat" id="viewBatchCode" name="viewBatchCode" style="display: none;">
+								<div class="panel-heading">
+									<h5 class="panel-title"><a class="btn-link" onclick="hideBatchCodePanel()"><i class="icon-arrow-left52 position-left"></i></a>Batch Codes Details</h5>
+								</div>
+
+								<div class="panel-body">
+
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="text-right">
+												<label>Slots Used:</label>
 											</div>
-											
 										</div>
 									</div>
 									
 
-									<table class="table datatable-html" name="table1" id="table1">
+									<div class="col-lg-12">
+										<div class="row">
 
-										<thead style="font-size: 14px;">
-											<tr>
-								                <th>Batch Code</th>
-								                <th>Name</th>
-								                <th>School</th>
-								                <th>Strand</th>
-								                <th>Target Course</th>
-								            </tr>
-										</thead>
+											<table class="table datatable-html">
+												<thead style="font-size: 13px;">
+													<tr>
+										                <th>School</th>
+										                <th></th>
+										                <th class="text-center">Actions</th>
+										            </tr>
+												</thead>
+											</table>
 
-										<tbody style="font-size: 13px;">
-										<?php foreach($resultsAccount as $result){
-												?>
-								            <tr>
-								                <td><?php echo $result['batchCode'];?></td>
-								                <td><?php echo $result['LastName'].', '.$result['firstName'] ;?></td>
-								                <td><?php echo $result['schoolName'];?></td>
-								                <td><?php echo $result['strand'];?></td>
-								                <td><?php echo $result['targetCourse'];?></td>
-												
-								            </tr>
-								            <?php }?>
-
-								        </tbody>
-
-									</table>
-
+										</div>
+									</div>
+									
 								</div>
 							</div>
 
@@ -99,3 +97,19 @@
 	<!-- Page container -->
 </body>
 </html>
+
+<script type="text/javascript">
+	function hideBatchCodePanel() {
+	    var x = document.getElementById("batchcodelist");
+	    var y = document.getElementById("viewBatchCode");
+	    if(x.style.display === "none"){
+	    	x.style.display = "block";
+        	y.style.display = "none";
+        	
+        }
+        else{
+        	x.style.display = "none";
+        	y.style.display = "block";
+        }
+	}
+</script>

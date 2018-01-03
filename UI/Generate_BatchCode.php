@@ -1,7 +1,12 @@
 <?php
+require_once('../config/config.php');
 require_once('../UI/SchoolHandler.php');
-$handler = new SchoolHandler();
-$resultSchool = $handler->getSchool();
+require_once('../UI/StrandHandler.php');
+$school = new SchoolHandler();
+$strand = new StrandHandler();
+$resultSchool = $school->getSchool();
+$resultCenter = $school->getCenter();
+$resultStrand = $strand->getStrand();
 ?>
 
 <html>
@@ -178,7 +183,9 @@ $resultSchool = $handler->getSchool();
 										<div class="form-group">
 							                <label>Center Location</label>
 							                <select class="form-control select2" style="width: 100%;">
-							                  <option></option>
+							                	<?php foreach($resultCenter as $center){?>
+							                  	<option value="<?php echo $center['idCenter']?>"><?php echo $center['centerName'];?></option>
+							                  	<?php }?>
 							                </select>
 							              </div>
 										<br/>
@@ -237,9 +244,16 @@ $resultSchool = $handler->getSchool();
 							<fieldset title="3">
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
+									<?php foreach($resultStrand as $strand){?>
+									<div class="form-group">
+										<label><?php echo $strand['strand'];?></label>
+										<input type="text" class="form-control" name="<?php echo $strand['strand'];?>">
+									</div>
+									<?php }?>
+									<label class=""></label>
 								</div>
 							</fieldset>
-
+							
 							
 
 							<button id="btnSubmit" name="btnSubmit" data-toggle="modal"  data-target="#exampleModal" class="btn btn-primary stepy-finish">Submit <i class="icon-check position-right"></i></button>

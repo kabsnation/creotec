@@ -1,4 +1,5 @@
 <?php
+include('../config/config.php');
 include('../UI/SchoolHandler.php');
 if(!isset($_GET['id']) && !isset($_GET['idPerson'])){
 	echo "<script>window.location='School_ManageAddressBook.php'</script>";

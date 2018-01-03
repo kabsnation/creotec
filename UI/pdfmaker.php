@@ -139,59 +139,56 @@ class pdfMaker{
 		$pdf->SetX(179);
 		$pdf->Cell(0,70,'1');
 
+		//20 rows
 		//column no.
-		$arrs= array("1","2","3","4","5");
+		$arrs= array("1","2","3","4","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5","5");
 		$count = 0;
+		
 		foreach($arrs as $arr){
 			$pdf->SetFont('arial','',10);
-			$pdf->SetX(16);
-			$pdf->Cell(0,108+$count,$arr);
-			$count = $count+10;
+			$pdf->SetXY(14,63+$count);
+			$pdf->Cell(0,0,$arr);
+			$count = $count+5;
 		}
+		
 		//column trainee no.
-		$arrs= array("LAG-0000001","LAG-0000002","LAG-0000003","LAG-0000004","LAG-0000005");
+		$arrs= array("LAG-0000001","LAG-0000002","LAG-0000003","LAG-0000004","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005","LAG-0000005");
 		$count = 0;
+		
 		foreach($arrs as $arr){
 			$pdf->SetFont('arial','',10);
-			$pdf->SetX(25);
-			$pdf->Cell(0,108+$count,$arr);
-			$count = $count+10;
+			$pdf->SetXY(25,63+$count);
+			$pdf->Cell(0,0,$arr);
+			$count = $count+5;
+
 		}
 		//column name
-		$arrs= array("Cuevas, Mark Dherrick P.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.");
+		$arrs= array("Cuevas, Mark Dherrick P.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.","Polidan, Christian Philip M.");
 		$count = 0;
 		foreach($arrs as $arr){
-			$pdf->SetFont('arial','',8);
-			$pdf->SetX(62);
-			$pdf->Cell(0,108+$count,$arr);
-			$count = $count+10;
+			$pdf->SetFont('arial','',10);
+			$pdf->SetXY(62,63+$count);
+			$pdf->Cell(0,0,$arr);
+			$count = $count+5;
 		}
 		//column gender
-		$arrs= array("M","M","M","M","M");
+		$arrs= array("M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M");
 		$count = 0;
 		foreach($arrs as $arr){
-			$pdf->SetFont('arial','',8);
-			$pdf->SetX(111.5);
-			$pdf->Cell(0,108+$count,$arr);
-			$count = $count+10;
+			$pdf->SetFont('arial','',10);
+			$pdf->SetXY(111.5,63+$count);
+			$pdf->Cell(0,0,$arr);
+			$count = $count+5;
 		}
 		//target course
 		$position = 50;
-		$arrs= array("Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor");
+		$arrs= array("Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor","Bachelor");
 		$count = 0;
 		foreach($arrs as $arr){
-			if(strlen($arr)>50){
-				$pdf->SetFont('arial','',8);
-				$pdf->SetX(125);
-				$pdf->Cell(0,108+$count,$arr);
-				$count = $count+10;	
-			}
-			else{
-				$pdf->SetFont('arial','',8);
-				$pdf->SetX(125);
-				$pdf->Cell(0,108+$count,$arr);
-				$count = $count+10;
-			}
+			$pdf->SetFont('arial','',10);
+			$pdf->SetXY(125,63+$count);
+			$pdf->Cell(0,0,$arr);
+			$count = $count+5;
 		}
 		$pdf->Output();
 	}
@@ -238,16 +235,28 @@ class pdfMaker{
 		$pdf->SetX(162);
 		$pdf->Cell(0,192,$numberAbsent);
 
-
-		$pdf->SetFont('arial','B',10);
-		$pdf->SetX(10);
-		$pdf->Cell(0,240,"testing");
 		//id
-		// foreach($ids as $id ){
-		// 	$pdf->SetFont('arial','B',10);
-		// 	$pdf->SetX(45);
-		// 	$pdf->Cell(0,143,$id);
-		// }		
+		$arrsId = array("LAG-0000000001","LAG-0000000002","LAG-0000000003","LAG-0000000004","LAG-0000000005","LAG-0000000005","LAG-0000000005","LAG-0000000005","LAG-0000000005","LAG-0000000005","LAG-0000000005","LAG-0000000005");
+		$count = 0;
+		$i = 0;
+		$counter = 0;
+		$setter = 1.5;
+		foreach ($arrsId as $id) {
+			$pdf->SetFont('arial','',10);
+			$pdf->SetXY(6, 131.5+($count-$counter));
+			$pdf->Cell(0,0,"LAG-0000000001");
+			$count = $count+10;
+			if($i == 3){
+				$setter = $setter +1;
+				$i=0;
+			}
+			else{
+				$counter = $setter;
+				$i++;
+			}
+		}
+		
+		
 		$pdf->Output();
 	}
 }

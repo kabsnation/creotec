@@ -97,28 +97,89 @@ $resultsGender= $connect -> select($queryGender);
 									<div class="col-md-4">
 											<div class="form-group">
 												<legend class="text-bold">Name</legend>
-												<label class="control-label col-lg-4">Last Name:<span class="text-danger">*</span></label>
+												<label class="control-label ">Last Name:<span class="text-danger">*</span></label>
 												<input id="txtLastName" name="txtLastName" required="required" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
 										<!-- </div> -->
 
 										<!-- <div class="col-md-4"> -->
 											<div class="form-group">
-												<label class="control-label col-lg-4">First Name:<span class="text-danger">*</span></label>
+												<label class="control-label ">First Name:<span class="text-danger">*</span></label>
 												<input id="txtFirstName" name="txtFirstName" required="required" type="text" class="form-control" required onkeyup="validname(this)">
 											</div>
 										<!-- </div> -->
 
 										<!-- <div class="col-md-4"> -->
 											<div class="form-group">
-												<label class="control-label col-lg-4">Middle Name:</label>
+												<label class="control-label ">Middle Name:</label>
 												<input id="txtMiddleName" name="txtMiddleName" type="text" class="form-control" onkeyup="validname(this)">
 											</div>
 										<!-- </div> -->
+										<legend class="text-semibold">Personal Information</legend>
+								
+									<div class="form-group">
+										<div class="content-group-md">
+											<label class="control-label col-lg-3">Birthdate: <span class="text-danger">*</span></label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
+												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<label class="control-label">Gender: <span class="text-danger">*</span></label>
+										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select">
+											<option></option>
+																		<?php foreach($resultsGender as $result) {?>
+																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
+																		<?php }?>
+																		</select>
+										</select>
+									</div>
+
+							
+									<div class="col-lg-3">
+										<label class="control-label">Nationality: <span class="text-danger">*</span></label>
+										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
+											<option></option>
+																		<?php foreach($resultsNationality as $result){?>
+																		<option value="<?php echo $result['idnationality'];?>">
+																			<?php echo $result['nationality']?>
+																		</option>
+																		<?php }?>
+										</select>
+									</div>
+
+									
+										<label class="control-label ">Religion: <span class="text-danger">*</span></label>
+										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
+											<option></option>
+																		<?php foreach($resultsReligion as $result) {?>
+																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
+																		<?php }?>
+																		</select>
+										</select>
+									
+								
 								</div>
 
 								<!-- <div class="row"> -->
-									<div class="col-lg-4"><legend class="text-bold">Address</legend>
+									<div class="col-lg-4">
+										<legend class="text-bold">Contact Information</legend>
+
+										<div class="form-group">
+										<label class="control-label ">Contact Number: <span class="text-danger">*</span></label>
+										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
+											</div>
+
+											<div class="form-group">
+												<label class="control-label ">Email Address: <span class="text-danger">*</span></label>
+												<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
+											</div>
+
+
+										<legend class="text-bold">Address</legend>
 									
 								<!-- 	<div class="col-md-4"> -->
 										<div class="form-group">
@@ -213,69 +274,6 @@ $resultsGender= $connect -> select($queryGender);
 
 							</div>
 								</div>
-								</div>
-							</fieldset>
-
-
-							<fieldset title="3">
-								<legend class="text-semibold">Personal Information</legend>
-								<div class="row" style="margin-bottom: 20px;">
-
-									<div class="col-md-3">
-										<div class="content-group-md">
-											<label class="control-label">Birthdate: <span class="text-danger">*</span></label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Gender: <span class="text-danger">*</span></label>
-										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsGender as $result) {?>
-																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Contact Number: <span class="text-danger">*</span></label>
-										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
-									</div>
-
-									<div class="col-md-3">
-										<label class="control-label col-lg-6">Email Address: <span class="text-danger">*</span></label>
-										<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
-									</div>
-								</div>
-
-								<div class="row" style="margin-bottom: 20px;">
-									<div class="col-md-6">
-										<label class="control-label col-lg-6">Nationality: <span class="text-danger">*</span></label>
-										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsNationality as $result){?>
-																		<option value="<?php echo $result['idnationality'];?>">
-																			<?php echo $result['nationality']?>
-																		</option>
-																		<?php }?>
-										</select>
-									</div>
-
-									<div class="col-md-6">
-										<label class="control-label col-lg-4">Religion: <span class="text-danger">*</span></label>
-										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsReligion as $result) {?>
-																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
-									</div>
 								</div>
 							</fieldset>
 

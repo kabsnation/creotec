@@ -1,5 +1,6 @@
 <?php
 require("../UI/SchoolHandler.php");
+require("../config/config.php");
 $connect = new Connect();
 $con = $connect->connectDB();
 $handler = new SchoolHandler();
@@ -27,5 +28,11 @@ if(isset($_POST['contactPerson'])){
 		}
 	
 	}
+}
+else{
+	echo "<script>
+						window.location ='School_AddSchool.php';
+						alert('Please add contact person');
+					 </script>";
 }
 ?>

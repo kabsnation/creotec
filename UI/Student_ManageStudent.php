@@ -11,7 +11,6 @@ $resultBatch = $connect->select($queryBatch);
 if(isset($_GET['idbatch'])&&isset($_GET['idstrand'])){
 	$idbatch = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idbatch'])));
 	$idstrand = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idstrand'])));
-	echo $idbatch." ".$idstrand;
 	$queryAccount = "SELECT firstName, LastName, schoolName, strand, targetCourse, batchCode 
 	FROM accountinformation, applicants, batch, targetcourse, school, strand
 	where applicants.idAccountInformation=accountinformation.idAccountInformation  

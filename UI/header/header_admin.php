@@ -8,7 +8,7 @@ $scripts = '<script type="text/javascript" src="assets/js/plugins/tables/datatab
 	<script type="text/javascript" src="assets/js/pages/datatables_data_sources.js"></script>
 	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
 	<script type="text/javascript" src="assets/js/core/libraries/jasny_bootstrap.min.js"></script>';
-if($_SERVER['REQUEST_URI'] =='/creotec/School_AddSchool.php'){
+if($_SERVER['REQUEST_URI'] =='/creotec/School_AddSchool.php'||$_SERVER['REQUEST_URI'] =='/creotec/UI/School_AddSchool.php'){
 	$arr[0] = 'Add School';
 	$arr[1] = 'active';
 	$arr[2] = '';
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_URI'] =='/creotec/School_AddSchool.php'){
 	$arr[5]='';
 	$arr[6]=$scripts;
 }
-else if($_SERVER['REQUEST_URI'] =='/creotec/School_ManageAddressBook.php'){
+else if($_SERVER['REQUEST_URI'] =='/creotec/School_ManageAddressBook.php' || $_SERVER['REQUEST_URI'] =='/creotec/UI/School_ManageAddressBook.php'){
 	$arr[0] = 'Manage School';
 	$arr[1] = '';
 	$arr[2] = 'active';
@@ -26,7 +26,7 @@ else if($_SERVER['REQUEST_URI'] =='/creotec/School_ManageAddressBook.php'){
 	$arr[5]='';
 	$arr[6]=$scripts;
 }
-else if($_SERVER['REQUEST_URI'] =='/creotec/Student_ManageStudent.php'){
+else if($_SERVER['REQUEST_URI'] =='/creotec/Student_ManageStudent.php' || $_SERVER['REQUEST_URI'] =='/creotec/UI/Student_ManageStudent.php'){
 	$arr[0] = 'Manage Students';
 	$arr[1] = '';
 	$arr[2] = '';
@@ -35,7 +35,7 @@ else if($_SERVER['REQUEST_URI'] =='/creotec/Student_ManageStudent.php'){
 	$arr[5]='';
 	$arr[6]=$scripts;
 }
-else if($_SERVER['REQUEST_URI'] =='/creotec/Attendance_View.php'){
+else if($_SERVER['REQUEST_URI'] =='/creotec/Attendance_View.php' || $_SERVER['REQUEST_URI'] =='/creotec/UI/Attendance_View.php'){
 	$arr[0] = 'Students Attendance';
 	$arr[1] = '';
 	$arr[2] = '';
@@ -45,7 +45,7 @@ else if($_SERVER['REQUEST_URI'] =='/creotec/Attendance_View.php'){
 	$arr[6]=$scripts;
 
 }
-else if($_SERVER['REQUEST_URI'] =='/creotec/Generate_BatchCode.php'){
+else if($_SERVER['REQUEST_URI'] =='/creotec/Generate_BatchCode.php' || $_SERVER['REQUEST_URI'] =='/creotec/UI/Generate_BatchCode.php'){
 	$arr[0] = 'Generate BatchCode';
 	$arr[1] = '';
 	$arr[2] = '';

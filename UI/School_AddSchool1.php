@@ -228,12 +228,12 @@
 
 									<div class="form-group">
 										<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
-										<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control" required="required"/>
+										<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control" required="required"/>
 									</div>
 
 									<div class="form-group">
 										<label><strong>Fax Number:</strong></label>
-										<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control"/>
+										<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control"/>
 									</div>
 
 									<div class="form-group">
@@ -260,7 +260,7 @@
 
 							</fieldset>
 
-							<button type="submit" class="btn btn-primary stepy-finish">Save <i class="icon-check position-right"></i></button>
+							<button type="submit" class="btn btn-blue stepy-finish">Save <i class="icon-check position-right"></i></button>
 						</form>
 
 					</div>

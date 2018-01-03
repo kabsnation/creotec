@@ -237,44 +237,10 @@ $provinceResult = $connect->select($provinceQuery);
 											<fieldset class="content-group">
 												<legend class="text-bold">Add School Contact Person</legend>
 												<div class="text-right">
-													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)"><i class="icon-phone-plus2 position-left"></i>Add</button>
+													<button type="button" class="btn btn-default" data-target="#modal_AddContactPerson" data-toggle="modal"><i class="icon-phone-plus2 position-left"></i>Add</button>
 												</div>
 
-												<div class="col-lg-6">
-													<legend class="text-bold">Contact Person</legend>
-													<div class="form-group">
-														<label><strong>Contact Person:</strong><span class="text-danger">*</span> </label>
-														<input id="txtContactPerson" name="txtContactPerson" type="text" class="form-control" required="required"/>
-													</div>
-
-													<div class="form-group">
-														<label><strong>Designation:</strong><span class="text-danger">*</span> </label>
-														<input id="txtDesignation" name="txtDesignation" type="text" class="form-control" required="required"/>
-													</div>
-												</div>
-
-												<div class="col-lg-6">
-													<legend class="text-bold">Contact Information</legend>
-													<div class="form-group">
-														<label><strong>Cellphone Number:</strong><span class="text-danger">*</span> </label>
-														<input id="txtContactNumber" name="txtContactNumber" required="required"="required="required"" class="form-control" data-mask="(+63) 999-999-9999" placeholder="(+63) 999-999-9999">
-													</div>
-
-													<div class="form-group">
-														<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
-														<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control" required="required"/>
-													</div>
-
-													<div class="form-group">
-														<label><strong>Fax Number:</strong></label>
-														<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99)-9999999" placeholder="(+99)-9999999" class="form-control"/>
-													</div>
-
-													<div class="form-group">
-														<label><strong>Email Address:</strong><span class="text-danger">*</span> </label>
-														<input id="txtEmailAddress" name="txtEmailAddress" type="email" class="form-control" required="required"/>
-													</div>
-												</div>
+												
 
 												<table class="table datatable-html" style="font-size: 13px; width: 100%" name="table1" id="table1">
 
@@ -322,31 +288,63 @@ $provinceResult = $connect->select($provinceQuery);
 
     <!-- Small modal -->
 	<div id="modal_AddContactPerson" class="modal fade">
-		<div class="modal-dialog modal-sm">
+		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h5 class="modal-title">Contact Person Information</h5>
+					<h5 class="modal-title">Add Contact Person</h5>
 				</div>
 
 				<div class="modal-body">
-					<form action="#" class="form-validate-jquery">
+					<form id="contactPerson" class="form-validate-jquery" >
 						<div class="row">
 							<div class="col-lg-12">
 								<legend class="text-bold">Contact Person Details</legend>
-												
-								
+								<div class="col-lg-6">
+									<legend class="text-bold">Contact Person</legend>
+									<div class="form-group">
+										<label><strong>Contact Person:</strong><span class="text-danger">*</span> </label>
+										<input id="txtContactPerson" name="txtContactPerson" type="text" class="form-control" required="required"/>
+									</div>
 
-								
+									<div class="form-group">
+										<label><strong>Designation:</strong><span class="text-danger">*</span> </label>
+										<input id="txtDesignation" name="txtDesignation" type="text" class="form-control" required="required"/>
+									</div>
+								</div>
+
+								<div class="col-lg-6">
+									<legend class="text-bold">Contact Information</legend>
+									<div class="form-group">
+										<label><strong>Cellphone Number:</strong><span class="text-danger">*</span> </label>
+										<input id="txtContactNumber" name="txtContactNumber" required="required" class="form-control" data-mask="(+63)999-999-9999" placeholder="(+63)999-999-9999">
+									</div>
+
+									<div class="form-group">
+										<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
+										<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control" required="required"/>
+									</div>
+
+									<div class="form-group">
+										<label><strong>Fax Number:</strong></label>
+										<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control"/>
+									</div>
+
+									<div class="form-group">
+										<label><strong>Email Address:</strong><span class="text-danger">*</span> </label>
+										<input id="txtEmailAddress" name="txtEmailAddress" type="email" class="form-control" required="required"/>
+									</div>
+								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-
-				<div class="modal -footer">
-					<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
 					
 				</div>
+
+					<div class="modal-footer">
+						<input type="button" onclick="addToContactTable(txtContactPerson.value,txtDesignation.value,txtContactNumber.value,txtTelephoneNumber.value,txtFaxNumber.value,txtEmailAddress.value)" class="btn btn-default" value="Submit"></input>
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>
@@ -356,16 +354,22 @@ $provinceResult = $connect->select($provinceQuery);
 </html>
 
 <script type="text/javascript">
+
 	function addToContactTable(contactPerson,designation,contactNumber,telephoneNumber,faxNumber,emailAddress){
-		var table = $('#table1').DataTable();
-		var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
-		var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
-		var cNumber = "<td><input type='hidden' value= "+contactNumber+" name='contactNumber[]' >"+contactNumber+"</td>";
-		var tNumber = "<td><input type='hidden' value= "+telephoneNumber+" name='telephoneNumber[]' >"+telephoneNumber+"</td>";
-		var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]' >"+faxNumber+"</td>";
-		var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
-		var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
-		table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
+		var n = emailAddress.search("@");
+
+		if(contactPerson!=""&&designation!=""&&contactNumber!=""&&telephoneNumber!=""&&emailAddress!=""&&n!=0){
+				var table = $('#table1').DataTable();
+				var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
+				var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
+				var cNumber = "<td><input type='hidden' value= "+contactNumber+" name='contactNumber[]' >"+contactNumber+"</td>";
+				var tNumber = "<td><input type='hidden' value= "+telephoneNumber+" name='telephoneNumber[]' >"+telephoneNumber+"</td>";
+				var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]' >"+faxNumber+"</td>";
+				var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
+				var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
+				table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
+				$('#modal_AddContactPerson').modal('hide');
+			}
 	}
 	function getCity(val){
 		$.ajax({

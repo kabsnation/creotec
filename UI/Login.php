@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CCDO - Log in</title>
+    <title>CREOTEC - Log in</title>
     <link rel="icon" href="assets/images/CCDO Logo.png" />
 
     <!-- Global stylesheets -->
@@ -55,13 +55,13 @@
                                     <img class="image" src="assets/images/logo_light.png" style="width: 50%" /></div>
 	                                <h5 class="content-group">Login to your account</h5>
 	                                <div class="content-divider text-muted">
-	                                	<span><small class="display-block">Enter your username and password</small></span>
+	                                	<span><small class="display-block">Enter your Employee ID and Password</small></span>
 		                            </div>
 	                                <br />
                             </div>
 
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="text" ID="username" name="username" class="form-control" Placeholder="Username" required="required">
+                                <input type="number" ID="employeeID" name="employeeID" class="form-control" Placeholder="Employee ID" required="required">
                                 <div class="form-control-feedback">
                                     <i class="icon-user text-muted"></i>
                                 </div>
@@ -78,7 +78,7 @@
                             <br />
 
                             <div class="form-group">
-                            	<input type="submit" class="btn bg-indigo btn-block" Text="Log In" value="Log In">
+                            	<input type="submit" class="btn bg-orange btn-block" Text="Log In" value="LOG IN"/>
                             </div>
 
                         </div>
@@ -100,25 +100,14 @@
 </html>
 
 <script type="text/javascript">
-	function submitLogin(username,password){
+	function submitLogin(employeeid,password){
 		$.ajax({
 			type:"POST",
 			url: "loginFunction.php",
-			data:'password='+password+",username="+username,
+			data:'password='+password+",employeeid="+employeeID,
 			success:function(data){
-                swal({
-                    title: "Success!",
-                    text: "Redirecting your browser...",
-                    type: "success"
-                });
+
             }
-            error:function(data){
-                swal({
-                    title: "Failed!",
-                    text: "The account does not exists.",
-                    type: "error"
-                });
-			}
 		});
 	}
 </script>

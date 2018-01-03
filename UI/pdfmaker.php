@@ -106,8 +106,9 @@ class pdfMaker{
 
 		$pdf->Output();
 	}
+
 	public function masterList($schoolName,$schoolCode,$batchNumber,$strand,$totalNumber){
-		 $pdf=new FPDF();
+		$pdf=new FPDF();
 		//var_dump(get_class_methods($pdf));
 		$pdf->AddPage();
 		//------------------------
@@ -161,31 +162,93 @@ class pdfMaker{
 		$count = 0;
 		foreach($arrs as $arr){
 			$pdf->SetFont('arial','',8);
-			$pdf->SetX(62	);
+			$pdf->SetX(62);
 			$pdf->Cell(0,108+$count,$arr);
 			$count = $count+10;
-
 		}
-
+		//column gender
+		$arrs= array("M","M","M","M","M");
+		$count = 0;
+		foreach($arrs as $arr){
+			$pdf->SetFont('arial','',8);
+			$pdf->SetX(111.5);
+			$pdf->Cell(0,108+$count,$arr);
+			$count = $count+10;
+		}
+		//target course
+		$position = 50;
+		$arrs= array("Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor of Science in Business Administration Major in Human Resource Development Management","Bachelor");
+		$count = 0;
+		foreach($arrs as $arr){
+			if(strlen($arr)>50){
+				$pdf->SetFont('arial','',8);
+				$pdf->SetX(125);
+				$pdf->Cell(0,108+$count,$arr);
+				$count = $count+10;	
+			}
+			else{
+				$pdf->SetFont('arial','',8);
+				$pdf->SetX(125);
+				$pdf->Cell(0,108+$count,$arr);
+				$count = $count+10;
+			}
+		}
 		$pdf->Output();
-
 	}
-	function BasicTable($header, $data)
-	{
+	public function attendance($batchNumber,$department,$totalNumber,$date,$numberPresent,$numberAbsent,$numberLate,$names,$ids,$timeIn,$timeOut,$remarks){
 		$pdf=new FPDF();
-		$pdf->SetFont('Arial','',14);
+		//var_dump(get_class_methods($pdf));
 		$pdf->AddPage();
-	    // Header
-	    foreach($header as $col)
-	    	 $pdf->Cell(40,7,$col,1);
-	    $pdf->Ln();
-	    // Data
-	    foreach($data as $row)
-	    {
-	        foreach($row as $col)
-	            $pdf->Cell(40,6,$col,1);
-	        $pdf->Ln();
-	    }
+		//------------------------
+		//FIRST COPY
+		$pdf->Image("/xampp/htdocs/creotec1/images/attendance.jpg", 0,0,210); 
+
+		//batch number
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(45);
+		$pdf->Cell(0,143,$batchNumber);
+
+		//department
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(45);
+		$pdf->Cell(0,157,$department);
+
+		//total number
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(45);
+		$pdf->Cell(0,172,$totalNumber);
+
+		//date
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(162);
+		$pdf->Cell(0,155,$date);
+
+		//present
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(162);
+		$pdf->Cell(0,167,$numberPresent);
+
+		//late
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(162);
+		$pdf->Cell(0,180,$numberLate);
+
+		//absent
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(162);
+		$pdf->Cell(0,192,$numberAbsent);
+
+
+		$pdf->SetFont('arial','B',10);
+		$pdf->SetX(10);
+		$pdf->Cell(0,240,"testing");
+		//id
+		// foreach($ids as $id ){
+		// 	$pdf->SetFont('arial','B',10);
+		// 	$pdf->SetX(45);
+		// 	$pdf->Cell(0,143,$id);
+		// }		
+		$pdf->Output();
 	}
 }
 

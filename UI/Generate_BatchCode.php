@@ -31,8 +31,7 @@ include('../UI/header/header_admin.php');
 							</div>
 						</div>
 
-	                	<form class="stepy-validation" action="#" method="POST" enctype="multipart/form-data">
-	                		<input name="batchcode" id="batchcode"  type="hidden" required class="form-control" value="<?php echo $batchcode ?>">
+	                	<form class="stepy-validation" action="generateBatchCode.php" method="POST" enctype="multipart/form-data">
 							<fieldset title="1">
 								<legend class="text-semibold">Choose Center </legend>
 								<div class="row">
@@ -109,7 +108,8 @@ include('../UI/header/header_admin.php');
 											<div class="form-group">
 										
 												<label><?php echo $strand['strand'];?></label>
-												<input type="number" name="strand[]" required="required" class="form-control">
+												<input type="hidden" name="idstrand[]" value="<?php echo $strand['idStrand'];?>">
+												<input type="number" name="capacity[]" required="required" class="form-control">
 												
 											</div>
 										<?php }}?>
@@ -119,7 +119,7 @@ include('../UI/header/header_admin.php');
 
 							
 
-							<button id="btnSubmit" name="btnSubmit" data-toggle="modal"  data-target="#exampleModal" class="btn btn-primary stepy-finish">Submit <i class="icon-check position-right"></i></button>
+							<input id="btnSubmit" type="submit" name="btnSubmit" class="btn btn-primary stepy-finish"></input>
 
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -134,7 +134,7 @@ include('../UI/header/header_admin.php');
 								<center><h3> Generated Batch Code: </h3></center>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary">Save changes</button>
+								<button type="button" class="btn btn-primary">Save</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal"> Close</button>
 							</div>
 						</div>

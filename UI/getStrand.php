@@ -1,5 +1,6 @@
 <?php
 require_once('../UI/StrandHandler.php');
+require_once('../config/config.php');
 $handler = new StrandHandler();
 if(isset($_POST["batchcode"])){
 	$results = $handler -> getStrandByBatchCode($_POST["batchcode"]);

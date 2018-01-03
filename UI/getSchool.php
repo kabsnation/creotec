@@ -1,5 +1,6 @@
 <?php
 require_once('../UI/SchoolHandler.php');
+require_once('../config/config.php');
 $handler = new SchoolHandler();
 if(isset($_POST["batchcode"])){
 	$results = $handler -> getSchoolByBatchCode($_POST["batchcode"]);

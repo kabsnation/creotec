@@ -42,6 +42,13 @@ include('../UI/header/header_admin.php');
 						<div class="page-title">
 							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Student Directory</span> </h4>
 						</div>
+
+						<div class="heading-elements">
+							<div class="heading-btn-group">
+								<a class="btn btn-link btn-float has-text"><i class=" icon-printer text-info" onclick="printAttendance()"></i><span>Print</span></a>
+							</div>
+						</div>
+
 					</div>
 				</div>
 				<!-- /page header -->
@@ -55,42 +62,51 @@ include('../UI/header/header_admin.php');
 							<div class="panel panel-flat">
 								<div class="panel-heading">
 									<h5 class="panel-title">Student Masterlist</h5>
-										
-									<div class="heading-elements">
-										<div class="form-group">
-												<label>Batch: </label>					                 
-												<select class="select" id="batch" name="batch" onchange="getMasterlist(this.value,strand.value);">
-													<?php $tempo;
-														foreach($resultBatch as $batch){
-															if($tempo != $batch['idbatch']){
-																$tempo = $batch['idbatch'];
-																if($idbatch==$batch['idbatch']){
-														?>
-														<option value="<?php echo $batch['idbatch'];?>" selected><?php echo $batch['idbatch'];?></option>
-														<?php }else {?>
-														<option value="<?php echo $batch['idbatch'];?>"><?php echo $batch['idbatch'];?></option>
-														<?php }}}?>
-								                </select>
-								                <label>Strand: </label>
-								                <select class="select" id="strand" name="strand" onchange="getMasterlist(batch.value,this.value);">
-													<?php
-														foreach($resultStrand as $strand){
-															if($idstrand==$strand['idStrand']){
-														?>
-														<option value="<?php echo $strand['idStrand'];?>" selected><?php echo $strand['strand']?></option>
-														<?php }
-														else{?>
-														<option value="<?php echo $strand['idStrand'];?>"><?php echo $strand['strand']?></option>
-														<?php }}?>
-								                </select>
-										    	<button type="button" class="btn btn-info"  onclick="printAttendance();"><i class="icon-printer" style="margin-right: 5px;"></i>Print</button>
-								    		<br />
-							    		</div>		
-						    		</div>
-
 								</div>
 
-								<div class="panel-body" style="margin-top: 15px;">
+								<div class="panel-body">
+									<div class="col-lg-12">
+										<div class="row">
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label>Batch: </label>					                 
+													<select class="form-control" id="batch" name="batch" onchange="getMasterlist(this.value,strand.value);">
+														<?php $tempo;
+															foreach($resultBatch as $batch){
+																if($tempo != $batch['idbatch']){
+																	$tempo = $batch['idbatch'];
+																	if($idbatch==$batch['idbatch']){
+															?>
+															<option value="<?php echo $batch['idbatch'];?>" selected><?php echo $batch['idbatch'];?></option>
+															<?php }else {?>
+															<option value="<?php echo $batch['idbatch'];?>"><?php echo $batch['idbatch'];?></option>
+															<?php }}}?>
+									                </select>
+									            </div>
+											</div>
+
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label>Strand: </label>
+									                <select class="form-control" id="strand" name="strand" onchange="getMasterlist(batch.value,this.value);">
+														<?php
+															foreach($resultStrand as $strand){
+																if($idstrand==$strand['idStrand']){
+															?>
+															<option value="<?php echo $strand['idStrand'];?>" selected><?php echo $strand['strand']?></option>
+															<?php }
+															else{?>
+															<option value="<?php echo $strand['idStrand'];?>"><?php echo $strand['strand']?></option>
+															<?php }}?>
+									                </select>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+									
+
 									<table class="table datatable-html" name="table1" id="table1">
 
 										<thead style="font-size: 14px;">

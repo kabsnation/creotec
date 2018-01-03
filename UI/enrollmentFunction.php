@@ -85,13 +85,19 @@ if(isset($_POST["batchcode"])){
 
 		if($result!=""){
 			$query="INSERT INTO `applicants`(`idtargetcourse`, `idAccountInformation`, `idStrand`, `idbatch`,picture,idSchool) VALUES('".$targetCourse."',".$result.",".$strand.",(SELECT idbatch FROM batch WHERE batchCode = '".$batchcode."'),'".$target_file."',".$school.")";
-			$result = $connect -> insert($query);
+			$result = $connect -> insertWithLastId($query);
 			
 			if($result){
 				$query = "SELECT idbatch FROM batch WHERE batchCode='".$batchcode."'";
 				$batchNumber = $connect->select($query);
+				$query = "SELECT schoolName from school WHERE idSchool =".$school;
+				$schoolName = $connect->select($query);
+				$name ="";
+				foreach ($schoolName as $name) {
+					$name = $name['schoolName'];
+				}
 				foreach($batchNumber as $number){
-					$pdfmaker->registrationForm($lastName.", ".$firstName." ".$middleName,$number['idbatch'],$strand,$school,$target_file);
+					$pdfmaker->registrationForm(str_pad($result + 1, 5, 0, STR_PAD_LEFT),$lastName.", ".$firstName." ".$middleName,$number['idbatch'],$strand,$name,$target_file);
 				}
 				// echo '<script type="text/javascript">
 				// 	window.location = "print.php?file=1";

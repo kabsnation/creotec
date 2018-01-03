@@ -23,6 +23,13 @@ include('../UI/header/header_admin.php');
 							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Attendance List</span> - View Attendance</h4>
 
 						</div>
+
+						<div class="heading-elements">
+							<div class="heading-btn-group">
+								<a class="btn btn-link btn-float has-text"><i class=" icon-printer text-info" onclick="printAttendance()"></i><span>Print</span></a>
+								<a href="#" class="btn btn-link btn-float has-text"><i class="icon-inbox text-teal"></i> <span>Send</span></a>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- /page header -->
@@ -35,52 +42,50 @@ include('../UI/header/header_admin.php');
 
 							<div class="panel panel-flat">
 								<div class="panel-heading">
-									<h5 class="panel-title">Students' Attendace</h5>
+									<h5 class="panel-title">Students' Attendance</h5>
 									<div class="heading-elements">
-									<button type="button" class="btn btn-info" onclick="printAttendance();"><i class="icon-printer" style="margin-right: 5px;"></i>Print</button>
-									<button type="button" class="btn btn-warning"><i class="icon-inbox" style="margin-right: 5px;"></i>Send</button>
-									
 									</div>
 								</div>
 
 								<div class="panel-body">
-									
-									<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
+									<div class="col-lg-12">
+										<table class="table datatable-html" style='font-size: 13px;' name="table1" id="table1">
 
-										<thead style="font-size: 13px;">
-											<tr>
-								                <th>Student Name</th>
-								                <th>Strand</th>
-								                <th style="width: 30%;">Date</th>
-								                <th>Time in</th>
-								                <th>Time out</th>
-								                <th class="text-center">Remarks</th>
-								            </tr>
-										</thead>
+											<thead style="font-size: 13px;">
+												<tr>
+									                <th>Student Name</th>
+									                <th>Strand</th>
+									                <th style="width: 30%;">Date</th>
+									                <th>Time in</th>
+									                <th>Time out</th>
+									                <th class="text-center">Remarks</th>
+									            </tr>
+											</thead>
 
-										<tbody style="font-size: 12px;">
-											<?php if($results){
-												foreach($results as $result){
-												?>
-								            <tr>
-								                <td><?php echo $result['lastName'].', '.$result['firstName'] ;?></td>
-								                <td><?php echo $result['strand']?></td>
-								                <td><?php echo $result['date']?></td>
-								                <td><?php echo $result['time_in']?></td>
-								                <td><?php echo $result['time_out']?></td>
-												<td class="text-center">
-													<?php if($result['remarks'] =="PRESENT"){?>
-													<span class='label label-success'><?php echo $result['remarks'];?></span>
-													<?php } else {?>
-													<span class='label label-danger'><?php echo $result['remarks'];?></span>
-													<?php }?>
-												</td>
-								            </tr>
-								            <?php }}?>
-								          
-								        </tbody>
+											<tbody style="font-size: 12px;">
+												<?php if($results){
+													foreach($results as $result){
+													?>
+									            <tr>
+									                <td><?php echo $result['lastName'].', '.$result['firstName'] ;?></td>
+									                <td><?php echo $result['strand']?></td>
+									                <td><?php echo $result['date']?></td>
+									                <td><?php echo $result['time_in']?></td>
+									                <td><?php echo $result['time_out']?></td>
+													<td class="text-center">
+														<?php if($result['remarks'] =="PRESENT"){?>
+														<span class='label label-success'><?php echo $result['remarks'];?></span>
+														<?php } else {?>
+														<span class='label label-danger'><?php echo $result['remarks'];?></span>
+														<?php }?>
+													</td>
+									            </tr>
+									            <?php }}?>
+									          
+									        </tbody>
 
-									</table>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

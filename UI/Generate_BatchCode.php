@@ -40,7 +40,7 @@ include('../UI/header/header_admin.php');
 									<div class="col-lg-6 col-md-offset-3">
 										<div class="form-group">
 							                <label>Center Location</label>
-							                <select class="form-control select2" style="width: 100%;">
+							                <select class="form-control select2" required="required" style="width: 100%;">
 							                	<?php if($resultCenter){
 							                		foreach($resultCenter as $center){?>
 							                  <option value="<?php echo $center['idCenter']?>"><?php echo $center['centerName'];?></option>
@@ -103,13 +103,13 @@ include('../UI/header/header_admin.php');
 							<fieldset title="3">
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
-									<div class="col-lg-6 col-md-offset-3">
+									<div class="col-lg-2 col-md-offset-5">
 										<?php if($resultStrand){
 											foreach($resultStrand as $strand){?>
 											<div class="form-group">
 										
 												<label><?php echo $strand['strand'];?></label>
-												<input type="text" name="strand[]" class="form-control">
+												<input type="number" name="strand[]" required="required" class="form-control">
 												
 											</div>
 										<?php }}?>

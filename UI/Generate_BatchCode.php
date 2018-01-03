@@ -237,6 +237,9 @@ $resultSchool = $handler->getSchool();
 							<fieldset title="3">
 								<legend class="text-semibold">Alloted Slots</legend>
 								<div class="row" style="margin-bottom: 20px;">
+									<div class="col-lg-12">
+										
+									</div>
 								</div>
 							</fieldset>
 

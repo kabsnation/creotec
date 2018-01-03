@@ -72,7 +72,7 @@ $resultsGender= $connect -> select($queryGender);
 						<div class="panel-heading">
 							<div class="text-center">
 								<h2 class="panel-title">Application Form</h6>
-									
+								<button class="btn btn-primary" data-toggle="modal" data-target="#preview"></button>
 							</div>
 						</div>
 
@@ -401,6 +401,28 @@ $resultsGender= $connect -> select($queryGender);
 		<!-- Page content -->
 	</div>
 	<!-- Page container -->
+
+	<!-- Preview -->
+	<div id="preview" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-brown">
+					<h6 class="modal-title">Custom header color</h6>
+				</div>
+
+				<div class="modal-body">
+					<h6 class="text-semibold">Text in a modal</h6>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn bg-brown">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Preview -->
+
 </body>
 
 	<!-- Core JS files -->

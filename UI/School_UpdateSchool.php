@@ -560,11 +560,32 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idSchool=" + id +"&schoolName="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?id='+id;
+						swal({
+					            title: "Success!",
+					            text: "The information has been updated.",
+					            confirmButtonColor: "#66BB6A",
+					            type: "success"
+					    });
+						setTimeout(function() {
+								window.location ='School_UpdateSchool.php?id='+id;
+						}, 1000);
+					},
+
+					error: function(data){
+						swal({
+					            title: "Success!",
+					            text: "The information has been updated.",
+					            confirmButtonColor: "#66BB6A",
+					            type: "error"
+					    });
+						setTimeout(function() {
+								window.location ='School_UpdateSchool.php?id='+id;
+						}, 1000);
 					}
 				});
 		    }
-		     //updateeee add
+
+		    //updateeee add
 		    function updateSchoolAdd(id){
 		    	var city = document.getElementById('dropdownCity').value;
 		    	$.ajax({
@@ -572,8 +593,18 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idSchool=" + id +"&city="+city,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?id='+id;
+						swal({
+					            title: "Success!",
+					            text: "The information has been updated.",
+					            confirmButtonColor: "#66BB6A",
+					            type: "success"
+					        });
+						setTimeout(function() {
+								window.location ='School_UpdateSchool.php?id='+id;
+						}, 1000);
 					}
+
+
 				});
 		    }
 		     //updateeee name

@@ -93,7 +93,7 @@ $resultsGender= $connect -> select($queryGender);
 										<br/>
 
 									</div>
-									<div class="control-label col-lg-12"><center>Note: The size of the photo should be 1 x1.</center></div>
+									<div class="control-label col-lg-12"><div class="text-center text-warning">Note: The size of the photo must be 1 x 1. The format of the photo must be ".jpeg" or ".jpg".</div>
 
 								</div>
 							</fieldset>

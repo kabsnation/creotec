@@ -15,7 +15,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 	$contactPerson ="";
 	$query = "";
 	$connect = $con->connectDB();
-	if(isset($_GET['id'])){
+	if(isset($_GET['id']) && !isset($_GET['idPerson'])){
 		$id = mysqli_real_escape_string($connect,stripcslashes(trim($_GET['id'])));
 		$query = 'SELECT * FROM province ORDER BY provinceName';
 		$provinceResult = $con->select($query);
@@ -30,7 +30,7 @@ else if(isset($_GET['id']) || isset($_GET['idPerson'])){
 				}
 			 </style>";
 	}
-	if(isset($_GET['idPerson'])){
+	if(isset($_GET['idPerson']) && isset($_GET['idPerson'])){
 		$idPerson =mysqli_real_escape_string($connect,stripcslashes(trim($_GET['idPerson'])));
 		$resultPerson = $handler->getContactPersonById($idPerson);
 		echo "<style type='text/css'>
@@ -104,7 +104,7 @@ include('../UI/header/header_admin.php');
                                             	<label><span class="text-danger">* </span><strong>New School Name:</strong></label>
                                             	 <div class="input-group content-group">
                                                     <div class="has-feedback has-feedback-left">
-                                                    	<input class="form-control" id="newSchoolName" name="newSchoolName" value="y4eah">
+                                                    	<input class="form-control" id="newSchoolName" name="newSchoolName">
                                                         <div class="form-control-feedback">
                                                         </div>
                                                     </div>
@@ -194,8 +194,8 @@ include('../UI/header/header_admin.php');
 																<i class="icon-menu9"></i>
 															</a>
 															<ul class="dropdown-menu dropdown-menu-right">
-																<li><a href='School_UpdateSchool.php?idPerson=<?php echo $person['idcontactPerson'];?>' name='sample' id='sample'><i class='icon-pencil' style="margin-left: 5px; margin-right: 3px;"></i>Edit</a></li>
-																<li><a href="#" name="sample" id="sample"  onclick="promptDelete(<?php echo $school['idSchool'];?>)"><i class="icon-trash" style="margin-left: 5px; margin-right: 3px;"></i>Delete</a></li>
+																<li><a href='School_UpdateSchool.php?id=<?php echo $_GET['id']?>&idPerson=<?php echo $person['idcontactPerson'];?>' name='sample' id='sample'><i class='icon-pencil' style="margin-left: 5px; margin-right: 3px;"></i>Edit</a></li>
+																<li><a href="#" name="sample" id="sample"  onclick="promptDelete1(<?php echo $person['idcontactPerson'];?>)"><i class="icon-trash" style="margin-left: 5px; margin-right: 3px;"></i>Delete</a></li>
 															</ul>
 														</li>
 													</ul>
@@ -214,7 +214,7 @@ include('../UI/header/header_admin.php');
 
 							<div class="panel panel-flat" name="editPerson" id="editPerson">
 								<div class="panel-heading">
-									<h5 class="panel-title"><a class="btn-link" onclick="hidePerson(this)"><i class="icon-arrow-left52 position-left"></i></a>Contact Person Details</h5>
+									<h5 class="panel-title"><a href="School_UpdateSchool.php?id=<?php echo $_GET['id']?>" class="btn-link"><i class="icon-arrow-left52 position-left"></i></a>Contact Person Details</h5>
 									<div class="heading-elements">
 							    	</div>
 								</div>
@@ -504,6 +504,33 @@ include('../UI/header/header_admin.php');
 		        			deleteSchool(val);
 		        		}
 		        });
+		    }
+		    function promptDelete1(val){
+		    	swal({
+			            title: "Are you sure?",
+			            text: "You will not be able to recover this information!",
+			            type: "warning",
+			            showCancelButton: true,
+			            confirmButtonColor: "#FF7043",
+			            confirmButtonText: "Delete",
+			            closeOnConfirm: true,
+			            closeOnCancel: true
+		        	},
+		        	function(isConfirm){
+		        		if(isConfirm){
+		        			deletePerson(val);
+		        		}
+		        });
+		    }
+		    function deletePerson(val){
+			    	$.ajax({
+					type: "POST",
+					url: "deletePerson.php",
+					data: 'idPerson=' + val,
+					success: function(data){
+						window.location ='School_UpdateSchool.php?id=<?php echo $_GET["id"];?>';
+					}
+				});
 		    }
 		    function getCity(val){
 				$.ajax({

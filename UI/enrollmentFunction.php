@@ -1,6 +1,5 @@
 <?php
 require_once('../config/config.php');
-require_once('../UI/pdfmaker.php');
 $connect = new Connect();
 $con = $connect-> connectDB();
 $pdfmaker = new pdfMaker();
@@ -88,22 +87,10 @@ if(isset($_POST["batchcode"])){
 			$result = $connect -> insertWithLastId($query);
 			
 			if($result){
-				$query = "SELECT idbatch FROM batch WHERE batchCode='".$batchcode."'";
-				$batchNumber = $connect->select($query);
-				$query = "SELECT schoolName from school WHERE idSchool =".$school;
-				$schoolName = $connect->select($query);
-				$name ="";
-				foreach ($schoolName as $name) {
-					$name = $name['schoolName'];
-				}
-				foreach($batchNumber as $number){
-					$pdfmaker->registrationForm(str_pad($result + 1, 5, 0, STR_PAD_LEFT),$lastName.", ".$firstName." ".$middleName,$number['idbatch'],$strand,$name,$target_file);
-				}
-				// echo '<script type="text/javascript">
-				// 	window.location = "print.php?file=1";
-				// 	alert("Success! Downloading the file.");
-				// 	window.location = "index.php";
-				// 	</script>';
+				
+				 echo '<script type="text/javascript">
+				 	window.location = "preview.php?id="'.$result.';
+				 	</script>';
 			}
 			else{
 				echo '<script type="text/javascript">

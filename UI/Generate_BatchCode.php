@@ -7,6 +7,22 @@ $strand = new StrandHandler();
 $resultSchool = $school->getSchool();
 $resultCenter = $school->getCenter();
 $resultStrand = $strand->getStrand();
+if(isset($_GET['id'])){
+	$con = new Connect();
+	$conn = $con->connectDB();
+	$id = mysqli_real_escape_string($conn,stripcslashes(trim($_GET['id'])));
+	$query = "SELECT batch.idbatch, batchCode,centerName, schoolName FROM batch JOIN center ON batch.idCenter = center.idCenter JOIN school_batch ON batch.idbatch = school_batch.idbatch JOIN school ON school_batch.idSchool = school.idSchool where batch.idbatch = ".$id." and batch.markasdeleted = 0";
+	$resultt = $con->select($query);
+	if($resultt){
+		$batchCode ="";
+		$centerName ="";
+		if($row = mysqli_fetch_array($resultt)){
+			$batchCode = $row['batchCode'];
+			$centerName = $row['centerName'];
+		}
+	}
+	
+}
 include('../UI/header/header_admin.php');
 ?>
 
@@ -23,7 +39,7 @@ include('../UI/header/header_admin.php');
 				<div class="content">
 					
 					<!-- Wizard with validation -->
-		            <div class="panel panel-white" id="generattionPanel">
+		            <div class="panel panel-white" id="generationPanel">
 						<div class="panel-heading">
 							<div class="text-center">
 								<h2 class="panel-title">Generate Batch Code</h6>
@@ -116,8 +132,8 @@ include('../UI/header/header_admin.php');
 		            </div>
 		            <!-- /wizard with validation -->
 
-		            <div class="col-lg-10 col-md-offset-1">
-			            <div class="panel panel-white" id="generatedPanel">
+		            <div class="col-lg-10 col-md-offset-1" >
+			            <div class="panel panel-white" id="generatedPanel" style="display: none">
 			            	<div class="panel-heading">
 			            		<div class="text-center">
 			            			<h2 class="panel-title">Generated Batch Code</h2>
@@ -126,17 +142,32 @@ include('../UI/header/header_admin.php');
 
 			            	<div class="panel-body">
 			            		<div class="text-center">
+			            			<label><strong>Center name:</strong></label>
+			            			<h2 style="margin-top: -5px;"><strong><?php echo $centerName;?></strong></h2>
+			            		</div>
+			            			
+			            		<div class="text-center">
 			            			<label><strong>Here's your batch code!</strong></label>
-			            			<h1 class="text-warning">ABC123</h1>
+			            			<h1 class="text-warning" style="margin-top: -5px;"><?php echo $batchCode;?></h1>
 			            		</div>
 
 			            		<div class="row">
 			            			<div class="col-md-12">
-			            				<table class="table datatable-html" style="font-size: 13px">
+			            				<table class="table datatable-html" style="font-size: 13px" id="table2">
 			            					<thead>
 			            						<th>No.</th>
 			            						<th>School Name</th>
 			            					</thead>
+			            					<tbody>
+			            						<?php if($resultt){
+			            							$counter = 1;
+			            							foreach($resultt as $info){?>
+			            						<tr>
+			            							<td><?php echo $counter;?></td>
+			            							<td><?php echo $info['schoolName']?></td>
+			            						</tr>
+			            						<?php $counter++;}}?>
+			            					</tbody>
 			            				</table>
 			            			</div>
 			            		</div>
@@ -165,6 +196,12 @@ include('../UI/header/header_admin.php');
 				"orderable": false
 				} ]
 			} );
+	$('#table2').DataTable( {
+			  "columnDefs": [ {
+				"targets": 0,
+				"orderable": false
+				} ]
+			} );
 	var counter = 0;
 	$('#select-all').click(function(event) {   
         if(counter ==0){
@@ -188,4 +225,19 @@ include('../UI/header/header_admin.php');
 			document.getElementById('checker').value=null;
 		}
 	}
+	function hidePerson() {
+		        var x = document.getElementById("generationPanel");
+		        var y = document.getElementById("generatedPanel");
+		        if(x.style.display === 'display'){
+		        	x.style.display = "none";
+		        	y.style.display = "block";
+		        }
+		        else{
+		        	x.style.display = "none";
+		        	y.style.display = "block";
+		        }
+		    }
+	<?php if(isset($_GET['id'])){?>
+		hidePerson();
+	<?php }?>
 </script>

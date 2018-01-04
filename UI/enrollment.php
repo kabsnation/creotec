@@ -89,7 +89,7 @@ $resultsGender= $connect -> select($queryGender);
 
 										</label>
 										<br/>
-										<input type="file" id="wizard-picture" name="wizard-picture" accept="image/*" required="required" class="file-input"  data-show-remove="false" data-show-caption="false" data-show-upload="false" data-browse-class="btn btn-primary btn-block">
+										<input type="file" id="wizard-picture" name="wizard-picture" accept=".jpg, .jpeg" required="required" class="file-input"  data-show-remove="false" data-show-caption="false" data-show-upload="false" data-browse-class="btn btn-primary btn-block">
 										<br/>
 
 									</div>

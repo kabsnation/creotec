@@ -7,7 +7,7 @@ $query= "SELECT batch.idbatch, batchCode,centerName FROM batch JOIN center ON ba
 $result = $con->select($query);
 if(isset($_GET['id'])){
 	$id = mysqli_real_escape_string($conn,stripcslashes(trim($_GET['id'])));
-	$querySchool = "SELECT batch.idbatch, batchCode,centerName, schoolName FROM batch JOIN center ON batch.idCenter = center.idCenter JOIN school_batch ON batch.idbatch = school_batch.idbatch JOIN school ON school_batch.idSchool = school.idSchool where batch.idbatch = ".$id." and batch.markasdeleted = 0";
+	$querySchool = "SELECT batch.idbatch, batchCode,centerName, schoolName FROM batch JOIN center ON batch.idCenter = center.idCenter JOIN school_batch ON batch.idbatch = school_batch.idbatch JOIN school ON school_batch.idSchool = school.idSchool where batch.idbatch = ".$id." and batch.markasdeleted = 0 order by batch.idbatch DESC";
 	$resultSchool = $con->select($querySchool);
 }
 ?>

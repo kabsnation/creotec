@@ -22,7 +22,7 @@ class SchoolHandler{
 	}
 	public function getContactPersonBySchoolId($idSchool){
 		$connect = new Connect();
-		$query ="SELECT * FROM `contactPersonDetails` WHERE idSchool= ".$idSchool;
+		$query ="SELECT * FROM `contactPersonDetails` WHERE idSchool= ".$idSchool." and markasdeleted =0";
 		$result = $connect->select($query);
 		return $result;
 	}
@@ -56,6 +56,12 @@ class SchoolHandler{
 		$connect = new Connect();
 		$query="SELECT * FROM school LEFT JOIN city on city.idcity = school.idcity LEFT JOIN province ON province.idprovince = city.idprovince WHERE idSchool=".$idSchool;
 		$result = $connect->select($query);
+		return $result;
+	}
+	public function deletePerson($idPerson){
+		$connect = new Connect();
+		$query = "UPDATE contactpersondetails SET markasdeleted = 1 WHERE idcontactPerson = ".$idPerson;
+		$result = $connect->delete($query);
 		return $result;
 	}
 	

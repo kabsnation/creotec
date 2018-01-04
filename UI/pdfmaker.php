@@ -8,7 +8,7 @@ class pdfMaker{
 		$date = date('d/m/y');
 		//------------------------
 		//FIRST COPY
-		$pdf->Image("/xampp/htdocs/creotec1/images/registration_form.jpg", 0,0,210); 
+		$pdf->Image("/xampp/htdocs/creotec/images/registration_form.jpg", 0,0,210); 
 		$pdf->Image($target_file, 170.82,25,24); 
 		//date line
 		$pdf->SetFont("arial","","8");
@@ -114,7 +114,7 @@ class pdfMaker{
 		$pdf->AddPage();
 		//------------------------
 		//FIRST COPY
-		$pdf->Image("/xampp/htdocs/creotec1/images/Masterlist.jpg", 0,0,210); 
+		$pdf->Image("/xampp/htdocs/creotec/images/Masterlist.jpg", 0,0,210); 
 		//school name
 		$pdf->SetFont('arial','',8.5);
 		$pdf->SetX(12.9);

@@ -1,3 +1,25 @@
+<?php
+require_once('../config/config.php');
+require_once('../UI/pdfmaker.php');
+$connect = new Connect();
+$con = $connect-> connectDB();
+$pdfmaker = new pdfMaker();
+if(isset($_GET['id'])){
+	$query ="SELECT * FROM applicants JOIN accountinformation as ai ON ai.idAccountInformation = applicants.idAccountInformation JOIN strand on strand.idStrand = applicants.idStrand JOIN targetcourse ON targetcourse.idtargetcourse = applicants.idtargetcourse JOIN school ON school.idSchool = applicants.idSchool JOIN city ON city.idCity = ai.idCity JOIN province ON province.idProvince = city.idProvince";
+	$id = mysqli_real_escape_string($con,stripcslashes(trim($_GET['id'])));
+	$query = "SELECT idbatch FROM batch WHERE batchCode='".$batchcode."'";
+	$batchNumber = $connect->select($query);
+	$query = "SELECT schoolName from school WHERE idSchool =".$school;
+	$schoolName = $connect->select($query);
+	$name ="";
+	foreach ($schoolName as $name) {
+		$name = $name['schoolName'];
+	}
+	foreach($batchNumber as $number){
+		$pdfmaker->registrationForm(str_pad($result + 1, 5, 0, STR_PAD_LEFT),$lastName.", ".$firstName." ".$middleName,$number['idbatch'],$strand,$name,$target_file);
+	}
+}
+?>
 <html>
 <head>
 	<meta charset="utf-8">

@@ -90,6 +90,8 @@ else if(isset($_SESSION['id'])){
 
                             <div class="form-group">
                             	<input type="submit" class="btn bg-orange btn-block" Text="Log In" value="LOG IN"/>
+                                <button id="sweet_success" name="sweet_success" class="btn btn-primary"></button>
+                                <button id="sweet_error" name="sweet_error" class="btn btn-primary"></button>
                             </div>
 
                         </div>
@@ -121,4 +123,23 @@ else if(isset($_SESSION['id'])){
             }
 		});
 	}
+    // Success alert
+    $('#sweet_success').on('click', function() {
+        swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            confirmButtonColor: "#66BB6A",
+            type: "success"
+        });
+    });
+
+    // Error alert
+    $('#sweet_error').on('click', function() {
+        swal({
+            title: "Oops...",
+            text: "Something went wrong!",
+            confirmButtonColor: "#EF5350",
+            type: "error"
+        });
+    });
 </script>

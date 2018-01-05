@@ -4,21 +4,46 @@ require_once('../UI/pdfmaker.php');
 $connect = new Connect();
 $con = $connect-> connectDB();
 $pdfmaker = new pdfMaker();
-if(isset($_GET['id'])){
-	$query ="SELECT * FROM applicants JOIN accountinformation as ai ON ai.idAccountInformation = applicants.idAccountInformation JOIN strand on strand.idStrand = applicants.idStrand JOIN targetcourse ON targetcourse.idtargetcourse = applicants.idtargetcourse JOIN school ON school.idSchool = applicants.idSchool JOIN city ON city.idCity = ai.idCity JOIN province ON province.idProvince = city.idProvince";
+if(isset($_GET['id']) && isset($_GET['batchCode'])){
 	$id = mysqli_real_escape_string($con,stripcslashes(trim($_GET['id'])));
-	$query = "SELECT idbatch FROM batch WHERE batchCode='".$batchcode."'";
-	$batchNumber = $connect->select($query);
-	$query = "SELECT schoolName from school WHERE idSchool =".$school;
-	$schoolName = $connect->select($query);
-	$name ="";
-	foreach ($schoolName as $name) {
-		$name = $name['schoolName'];
+	$batchcode = mysqli_real_escape_string($con,stripcslashes(trim($_GET['batchCode'])));
+	$query ="SELECT idapplicant,school.idSchool,picture,firstName,middleName,lastName,birthDate,genderName,nationality,religion,contactNumber,cityName,homeAddress,provinceName,emailAddress,gAddress,schoolName,strand,targetCourse,gName,relationship, gContactNumber, gEmailAddress FROM applicants JOIN accountinformation as ai ON ai.idAccountInformation = applicants.idAccountInformation JOIN strand on strand.idStrand = applicants.idStrand JOIN targetcourse ON targetcourse.idtargetcourse = applicants.idtargetcourse JOIN school ON school.idSchool = applicants.idSchool JOIN city ON city.idCity = ai.idCity JOIN province ON province.idProvince = city.idProvince JOIN gender on ai.idGender = gender.idGender JOIN nationality ON ai.idnationality = nationality.idnationality JOIN religion ON ai.idreligion = religion.idreligion JOIN relationship ON ai.idrelationship = relationship.idrelationship where applicants.idapplicant =".$id;
+	$result = $connect->select($query);
+	if($result){
+		if(isset($_GET['pdf'])){
+			if($_GET['pdf']=='true'){
+				foreach($result as $info){
+						$query = "SELECT idbatch FROM batch WHERE batchCode='".$batchcode."'";
+						$batchNumber = $connect->select($query);
+						$query = "SELECT schoolName from school WHERE idSchool =".$info['idSchool'];
+						$schoolName = $connect->select($query);
+						$name ="";
+						if($row = mysqli_fetch_array($batchNumber)){
+							foreach ($schoolName as $name) {
+								$name = $name['schoolName'];
+							}
+						foreach($batchNumber as $number){
+							$department = "PRODUCTION";
+							if($info['strand']== 'ABM'){
+								$department="SUPPORT";
+							}
+							$pdfmaker->registrationForm(str_pad($id + 1, 5, 0, STR_PAD_LEFT),$info['lastName'].", ".$info['firstName']." ".$info['middleName'],$row[0],$info['strand'],$info['schoolName'],$info['picture'],$department);
+						}	
+					}
+					else{
+						echo "<script>window.location='index.php';</script>";
+					}
+				}
+			}
+		}
 	}
-	foreach($batchNumber as $number){
-		$pdfmaker->registrationForm(str_pad($result + 1, 5, 0, STR_PAD_LEFT),$lastName.", ".$firstName." ".$middleName,$number['idbatch'],$strand,$name,$target_file);
+	else{
+		echo "<script>window.location='index.php';</script>";
 	}
 }
+else{
+		echo "<script>window.location='index.php';</script>";
+	}
 ?>
 <html>
 <head>
@@ -82,227 +107,120 @@ if(isset($_GET['id'])){
 	                		<div class="row">
 	                		<div class="col-md-4">
 	                		<legend class="text-semibold col-md-12">Student Information</legend>
-	                				
-											<div class="form-group col-md-12">
-												<label class="control-label">Name:<span class="text-danger">*</span></label>
-												<input id="txtLastName" name="txtLastName" required="required" type="text" class="form-control" onkeyup="validname(this)">
+	                				<?php if($result){
+	                					foreach($result as $info){?>
+											<div class="content-group-md col-md-12">
+												<label class="control-label">Name: </label>
+												<label class="control-label"><strong><?php echo $info['firstName']. ' '. $info['middleName'].' '.$info['lastName'];?></strong></label>
 											</div>
-										<div class="content-group-md col-md-6">
-											<label class="control-label">Birthdate: <span class="text-danger">*</span></label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="icon-calendar3"></i></span>
-												<input type="text" class="form-control" id="anytime-month-numeric" name="anytime-month-numeric" value="01/01/2018" required="required">
-											</div>
+											<?php }}?>
+										<div class="content-group-md col-md-12">
+											<label class="control-label">Birthdate: </label>
+											<label class="control-label"><strong><?php echo $info['birthDate'];?></strong></label>
 										</div>
 									
 
-									<div class="content-group-md col-md-6">
-										<label class="control-label">Gender: <span class="text-danger">*</span></label>
-										<select id="dropdownSex" name="dropdownSex" required="required" class="form-control select  ">
-											<option></option>
-																		<?php foreach($resultsGender as $result) {?>
-																		<option value="<?php echo $result['idGender'];?>"><?php echo $result['genderName'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
+									<div class="content-group-md col-md-12">
+										<label class="control-label">Gender: </label>
+										<label class="control-label"><strong><?php echo $info['genderName'];?></strong></label>
+										
 									</div>
 										
-									<div class="content-group-md col-md-6">
-										<label class="control-label ">Nationality: <span class="text-danger">*</span></label>
-										<select id="dropdownNationality" name="dropdownNationality" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsNationality as $result){?>
-																		<option value="<?php echo $result['idnationality'];?>">
-																			<?php echo $result['nationality']?>
-																		</option>
-																		<?php }?>
-										</select>
+									<div class="content-group-md col-md-12">
+										<label class="control-label ">Nationality: </label>
+										<label class="control-label"><strong><?php echo $info['nationality'];?></strong></label>
 									</div>
 
-									<div class="content-group-md col-md-6">
-										<label class="control-label">Religion: <span class="text-danger">*</span></label>
-										<select id="dropdownReligion" name="dropdownReligion" required="required" class="form-control select">
-											<option></option>
-																		<?php foreach($resultsReligion as $result) {?>
-																		<option value="<?php echo $result['idreligion'];?>"><?php echo $result['religion'];?></option>
-																		<?php }?>
-																		</select>
-										</select>
+									<div class="content-group-md col-md-12">
+										<label class="control-label">Religion: </label>
+										<label class="control-label"><strong><?php echo $info['religion'];?></strong></label>
 									</div>
 
-									<div class="content-group-md col-md-6">
-										<label class="control-label">Contact Number: <span class="text-danger">*</span></label>
-										<input id="contactNumber" name="contactNumber" required="required" class="form-control" data-mask="(+63) 999-999-9999">
+									<div class="content-group-md col-md-12">
+										<label class="control-label">Contact Number: </label>
+										<label class="control-label"><strong><?php echo $info['contactNumber'];?></strong></label>
 										</div>
-										<div class="content-group-md col-md-6">
-										<label class="control-label">Email Address: <span class="text-danger">*</span></label>
-										<input id="emailAddress" name="emailAddress" required="required" class="form-control" type="email">
+										<div class="content-group-md col-md-12">
+										<label class="control-label">Email Address:</label>
+										<label class="control-label"><strong><?php echo $info['emailAddress'];?></strong></label>
 										<br />
 										</div>
 
 								
 								
-									<div class="form-group col-md-6">
-											<label class="control-label col-lg-3">Province:<span class="text-danger">*</span></label>
-											<select id="dropdownProvince" name="dropdownProvince" required="required" class="form-control select" onchange="getCity(this.value)">
-												<option></option>
-												<?php
-													foreach($results as $result){
-												?>
-													<option  value='<?php echo $result["idProvince"];?>'><?php echo $result["provinceName"];?></option>
-												<?php
-													}
-												?>
-											</select> 
-										</div>
-
-										<div class="form-group col-md-6">
-											<label class="control-label">City / Municipality:<span class="text-danger">*</span></label>
-											<select id="dropdownCity" name="dropdownCity" required="required" class="form-control select"> 
-											</select> 
-										</div>
-									
-										<div class="form-group col-md-6">
-											<label class="control-label ">Barangay:<span class="text-danger">*</span></label>
-											<input id="txtBarangay" name="txtBarangay" required="required" type="text" class="form-control" onkeyup="validadd(this)">
-										</div>
-									
-								
-								
-										<div class="form-group col-md-6">
-											<label class="control-label">Subdivision / Village:</label>
-											<input type="text" class="form-control" id="txtSubdivision" name="txtSubdivision" onkeyup="validadd(this)">
-										</div>
-									    
-									    <div class="form-group col-md-12">
-											<label class="control-label ">House No./ Building No./ St./ Block / Lot</label>
-											<input type="text" class="form-control" id="txtSubdivisionBlock" name="txtSubdivisionBlock" onkeyup="validadd(this)">
-										</div>
-
+									<div class="content-group-md col-md-12">
+											<label class="control-label ">Province: </label>
+											<label class="control-label"><strong><?php echo $info['provinceName'];?></strong></label>
 									</div>
-
-<div class="col-lg-4">
+										<div class="content-group-md col-md-12">
+											<label class="control-label">City / Municipality: </label>
+											<label class="control-label"><strong><?php echo $info['provinceName'];?></strong></label>
+										</div>
+									
+										<div class="content-group-md col-md-12">
+											<label class="control-label ">Home Address: </label>
+											<label class="control-label"><strong><?php echo $info['homeAddress'];?></strong></label>
+										</div>
+									</div>
+									
+								
+							<div class="col-lg-4">
 										
 									<div class="col-lg-12"><legend class="text-bold">School</legend></div>
 									<div class="col-md-12">
 										<div class="form-group">
-											<label class="control-label">School Name: <span class="text-danger">*</span></label>
-											<select id="txtSchoolName" required="required" name="txtSchoolName" class="form-control select">
-												<option></option>
-																		<?php
-																		foreach($resultsSchool as $resultSchool){
-																		?>
-																		<option value="<?php echo $resultSchool["idSchool"];?>"><?php echo $resultSchool['schoolName'];?></option>
-																		<?php }?>
-											</select>
+											<label class="control-label">School Name: </label>
+											<label class="control-label"><strong><?php echo $info['schoolName'];?></strong></label>
 										</div>
 									</div>
 
 									<div class="col-md-12">
 										<div class="form-group">
-											<label class="control-label ">Choose your Strand: <span class="text-danger">*</span></label>
-											<select id="dropdownStrand" required="required" name="dropdownStrand" class="form-control select">
-												<option></option>
-												<?php
-												foreach($resultStrand as $strand){
-												?>
-												<option value='<?php echo $strand["idStrand"];?>'>
-													<?php echo $strand["strand"];?>
-												</option>
-												<?php }?>
-											</select> 
+											<label class="control-label ">Choose your Strand: </label>
+											<label class="control-label"><strong><?php echo $info['strand'];?></strong></label>
 										</div>
 									</div>
 
 									<div class="col-md-12">
 										<div class="form-group">
-											<label class="control-label">Target Course: <span class="text-danger">*</span></label>
-											<select id="dropdownTargetCourse" name="dropdownTargetCourse" required="required" class="form-control select">
-												<option></option>
-																	<?php foreach($resultsCourse as $result){ ?>
-																		<option value="<?php echo $result['idtargetcourse'];?>"><?php echo $result['targetCourse'];?></option>
-																		<?php } ?>
-											</select> 
+											<label class="control-label">Target Course: </label>
+											<label class="control-label"><strong><?php echo $info['targetCourse'];?></strong></label>
 										</div>
 									</div>	
-									<legend class="text-semibold col-md-12">Guardian Information</legend>
-								
-									
-											<div class="form-group col-md-12">
-												<label class="control-label ">Name:</label>
-												<input id="txtGmiddleName" name="txtGmiddleName" type="text" class="form-control" onkeyup="validname(this)">
-											</div>
-										
-									
-											<div class="form-group col-md-6">
-												<label class="control-label ">Relationship: <span class="text-danger">*</span></label>
-												<select id="dropdownRelationship" name="dropdownRelationship" required="required" class="form-control select">
-													<option></option>
-																		
-																		<?php foreach($resultsRelationship as $result){?>
-																		<option value="<?php echo $result['idrelationship'];?>">
-																			<?php echo $result['relationship']?>
-																		</option>
-																		<?php }?>
-												</select>
-											</div>
-											<div class="form-group col-md-6">
-												<label class="control-label ">Contact Number:<span class="text-danger">*</span></label>
-												<input id="gContactNumber" name="gContactNumber" required="required" type="text" class="form-control" data-mask="(+63) 999-999-9999">
-											</div>	
-											<div class="form-group col-md-12">
-												<label class="control-label col-md-12">Email Address:</label>
-												<input id="txtGemailAddress" name="txtGemailAddress" required="required" type="email" class="form-control">
-											</div>	
 								</div>
-<div class="col-lg-4">
-										<legend class="text-bold col-md-12">Address</legend>
+									<div class="col-lg-4">
+
+										<legend class="text-semibold col-md-12">Guardian Information</legend>
+											<div class="col-md-12">
+												<label class="control-label">Name: </label>
+												<label class="control-label"><strong><?php echo $info['gName'];?></strong></label>
+											</div>
+											<div class="col-md-12">
+												<label class="control-label ">Relationship: </label>
+												<label class="control-label"><strong><?php echo $info['relationship'];?></strong></label>
+											</div>
+											<div class="col-md-12">
+												<label class="control-label ">Contact Number: </label>
+												<label class="control-label"><strong><?php echo $info['contactNumber'];?></strong></label>
+											</div>	
+											<div class="col-md-12">
+												<label class="control-label">Email Address:</label>
+												<label class="control-label"><strong><?php echo $info['gEmailAddress'];?></strong></label>
+											</div>	
 										<div class="form-group col-md-12">
-											<label class="control-label">Province:<span class="text-danger">*</span></label>
-											<select id="dropdownGprovince" name="dropdownGprovince" required="required" class="form-control select" onchange="getCity1(this.value)">
-																		<option></option>
-																		<?php
-																			foreach($results as $result){
-
-																		?>
-																		<option  value='<?php echo $result["idProvince"];?>'><?php echo $result["provinceName"];?></option>
-
-																		<?php
-																			}
-																		?></select> 
+											<label class="control-label">Address: </label>
+											<label class="control-label"><strong><?php echo $info['gAddress'];?></strong></label>
+											
 										</div>
 										<div class="form-group col-md-12">
-											<label class="control-label ">City / Municipality:<span class="text-danger">*</span></label>
-											<select id="dropdownCity1" name="dropdownCity1" required="required" class="form-control select"></select> 
+											<label class="text-danger" style="margin-top: -10px;">
+												DONT FORGET TO PRINT YOUR VOUCHER!
+											</label>
+											<br>
+											<a href="preview.php?id=<?php echo $id;?>&batchCode=<?php echo $batchcode?>&pdf=true">Print Voucher</a>	
 										</div>
-									
-										<div class="form-group col-md-12">
-											<label class="control-label ">Barangay:<span class="text-danger">*</span></label>
-											<input id="txtGbarangay" name="txtGbarangay" type="text" class="form-control" onkeyup="validadd(this)">
-										</div>
-									
-								
+							</div>
 
-										<div class="form-group col-md-12">
-											<label class="control-label ">Subdivision / Village:</label>
-											<input id="txtGsubdivision" name="txtGsubdivision" type="text" class="form-control" onkeyup="validadd(this)">
-										</div>
-									
-										<div class="form-group col-md-12">
-											<label class="control-label ">House No./ Building No./ St./ Block / Lot</label>
-											<input id="txtGsubdivisionBlock" name="txtGsubdivisionBlock" type="text" class="form-control" onkeyup="validadd(this)">
-										</div>
-									</div>
-									
-							
-								
-									
-
-
-
-
-
-							</div>		
 						</form>
 		            </div>
 		            <!-- /wizard with validation -->

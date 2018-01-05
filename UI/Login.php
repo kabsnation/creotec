@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(isset($_GET['logout']))
+{
+    if($_GET['logout']=='true')
+        session_destroy();
+}
+else if(isset($_SESSION['id'])){
+    echo "<script> window.location ='School_AddSchool.php';</script>";
+}
+?>
 <!DOCTYPE html>
 <html>
 <head runat="server">

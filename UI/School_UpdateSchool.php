@@ -584,7 +584,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson=" + id +"&Cname="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }
@@ -596,7 +596,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson=" + id +"&Cdes="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }
@@ -608,7 +608,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson="+id+"&Ccell="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }
@@ -620,7 +620,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson="+id+"&Ctele="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }
@@ -632,7 +632,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson="+id+"&Cfax="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }
@@ -644,7 +644,7 @@ include('../UI/header/header_admin.php');
 					url: "updateSchoolFunction.php",
 					data: "idContactPerson="+id+"&Cemail="+val,
 					success: function(data){
-						window.location ='School_UpdateSchool.php?idPerson='+id;
+						window.location ='School_UpdateSchool.php?id=<?php echo $id?>&idPerson='+id;
 					}
 				});
 		    }

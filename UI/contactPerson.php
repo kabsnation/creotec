@@ -15,7 +15,10 @@ if(isset($_POST['contactPerson'])){
 			$designation = mysqli_real_escape_string($con,stripcslashes(trim($_POST['designation'][$i])));
 			$contactNumber = mysqli_real_escape_string($con,stripcslashes(trim($_POST['contactNumber'][$i])));
 			$telephoneNumber = mysqli_real_escape_string($con,stripcslashes(trim($_POST['telephoneNumber'][$i])));
-			$faxNumber = mysqli_real_escape_string($con,stripcslashes(trim($_POST['faxNumber'][$i])));
+			$faxNumber='';
+			if(isset($_POST['faxNumber'])){
+				$faxNumber = mysqli_real_escape_string($con,stripcslashes(trim($_POST['faxNumber'][$i])));
+			}
 			$emailAddress = mysqli_real_escape_string($con,stripcslashes(trim($_POST['emailAddress'][$i])));
 			$result = $handler->addContactPerson($contactPerson,$designation,$lastId,$emailAddress,$contactNumber,
 								$telephoneNumber,$faxNumber);

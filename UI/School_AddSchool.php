@@ -195,12 +195,12 @@ include('../UI/header/header_admin.php');
 
 									<div class="form-group">
 										<label><strong>Telephone Number:</strong><span class="text-danger">*</span> </label>
-										<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control" required="required"/>
+										<input id="txtTelephoneNumber" name="txtTelephoneNumber" data-mask="(+99)9999999" placeholder="(+99)9999999" class="form-control" required="required"/>
 									</div>
 
 									<div class="form-group">
 										<label><strong>Fax Number:</strong></label>
-										<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99) 9999999" placeholder="(+99) 9999999" class="form-control"/>
+										<input id="txtFaxNumber" name="txtFaxNumber" data-mask="(+99)9999999" placeholder="(+99)9999999" class="form-control"/>
 									</div>
 
 									<div class="form-group">
@@ -230,14 +230,14 @@ include('../UI/header/header_admin.php');
 
 	function addToContactTable(contactPerson,designation,contactNumber,telephoneNumber,faxNumber,emailAddress){
 		var n = emailAddress.search("@");
-
+		alert(faxNumber);
 		if(contactPerson!=""&&designation!=""&&contactNumber!=""&&telephoneNumber!=""&&emailAddress!=""&&n!=0){
 				var table = $('#table1').DataTable();
-				var cPerson ="<td><input type='hidden' value= "+contactPerson+" name='contactPerson[]'>"+contactPerson+"</td>";
+				var cPerson ="<td><input type='hidden' value= "+faxNumber+" name='contactPerson[]'>"+contactPerson+"</td>";
 				var dDesignation = "<td><input type='hidden' value= "+designation+" name='designation[]' >"+designation+"</td>";
 				var cNumber = "<td><input type='hidden' value= "+contactNumber+" name='contactNumber[]' >"+contactNumber+"</td>";
 				var tNumber = "<td><input type='hidden' value= "+telephoneNumber+" name='telephoneNumber[]' >"+telephoneNumber+"</td>";
-				var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]' >"+faxNumber+"</td>";
+				var fNumber = "<td><input type='hidden' value= "+faxNumber+" name='faxNumber[]'>"+faxNumber+"</td>";
 				var eAddress = "<td><input type='hidden' value= "+emailAddress+" name='emailAddress[]' >"+emailAddress+"</td>";
 				var action = "<a name='sample' id='sample' style='color: #d35400'><i class='icon-trash'></i>Delete</a>";
 				table.row.add([cPerson,dDesignation,cNumber,tNumber,fNumber,eAddress, action]).draw(false);
@@ -254,7 +254,9 @@ include('../UI/header/header_admin.php');
 			}
 		});
 	}
-	var myTable = $('#table1').DataTable();
+	var myTable = $('#table1').DataTable({
+	  "autoWidth": true
+	});
 	$('#table1').on("click", "a", function(){
             console.log($(this).parent());
             myTable.row($(this).parents('tr')).remove().draw(false);

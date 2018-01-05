@@ -292,7 +292,7 @@ $resultsGender= $connect -> select($queryGender);
 											</div>
 										
 									<legend class="text-semibold">Personal Information</legend>
-											<div class="form-group col-md-6">
+											<div class="form-group">
 												<label class="control-label ">Relationship: <span class="text-danger">*</span></label>
 												<select id="dropdownRelationship" name="dropdownRelationship" required="required" class="form-control select">
 													<option></option>
@@ -305,7 +305,7 @@ $resultsGender= $connect -> select($queryGender);
 												</select>
 											</div>
 										
-											<div class="form-group col-md-6">
+											<div class="form-group">
 												<label class="control-label ">Contact Number:<span class="text-danger">*</span></label>
 												<input id="gContactNumber" name="gContactNumber" required="required" type="text" class="form-control" data-mask="(+63) 999-999-9999">
 											</div>	

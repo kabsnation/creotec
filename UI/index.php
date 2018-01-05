@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['id'])){
+	echo "<script> window.location ='School_AddSchool.php';</script>";
+}	
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -148,7 +154,7 @@
 		                $("#nextBtn").prop('disabled', true);
 					}
 					else{
-						$("#batchcodeMessage").html(result[0] + result[1]);
+						$("#batchcodeMessage").html(result);
 		                $("#nextBtn").prop('disabled', false);
 					}
 				},

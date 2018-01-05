@@ -49,7 +49,7 @@ include("../UI/header/header_admin.php");
 												<div class="form-group">
 													<legend class="text-semibold">Address </legend>
 													<label>Province:</label>
-													<select class="form-control" id="province" onchange="getCity(this.value)" required="required">
+													<select class="form-control select" id="province" onchange="getCity(this.value)" required="required">
 															<option></option>
 														<?php if($provinceResult){
 															foreach($provinceResult as $province){?>

@@ -10,7 +10,8 @@ if(isset($_SESSION['id'])){
 $scripts = '<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
-
+	
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
 	<script type="text/javascript" src="assets/js/core/app.js"></script>
 	<script type="text/javascript" src="assets/js/pages/datatables_data_sources.js"></script>
 	<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
@@ -48,18 +49,18 @@ else if(strpos($_SERVER['REQUEST_URI'],'Student_ManageStudent.php')){
 	$arr[7]='';
 	$arr[8]=$scripts;
 }
-else if(strpos($_SERVER['REQUEST_URI'] ,'Attendance_View.php')){
-	$arr[0] = 'Students Attendance';
-	$arr[1] = '';
-	$arr[2] = '';
-	$arr[3] ='';
-	$arr[4] ='active';
-	$arr[5]='';
-	$arr[6]='';
-	$arr[7]='';
-	$arr[8]=$scripts;
+// else if(strpos($_SERVER['REQUEST_URI'] ,'Attendance_View.php')){
+// 	$arr[0] = 'Students Attendance';
+// 	$arr[1] = '';
+// 	$arr[2] = '';
+// 	$arr[3] ='';
+// 	$arr[4] ='active';
+// 	$arr[5]='';
+// 	$arr[6]='';
+// 	$arr[7]='';
+// 	$arr[8]=$scripts;
 
-}
+// }
 else if(strpos($_SERVER['REQUEST_URI'] ,'School_UpdateSchool.php')){
 	$arr[0] = 'Update School';
 	$arr[1] = '';
@@ -236,10 +237,10 @@ else{
 									</ul>
 								</li>
 
-								<li class="<?php echo $arr[4];?>">
+								<!-- <li class="<?php echo $arr[4];?>">
 									<a href="Attendance_View.php"><i class="icon-users"></i> <span>Attendance List</span></a>
 									
-								</li>
+								</li> -->
 
 								<li>
 									<a href="#"><i class="icon-vcard"></i> <span>Batch Code</span></a>

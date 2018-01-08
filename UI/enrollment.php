@@ -78,7 +78,7 @@ $resultsGender= $connect -> select($queryGender);
 
 	                	<form class="stepy-validation" action="enrollmentFunction.php" method="POST" enctype="multipart/form-data">
 	                		<input name="batchcode" id="batchcode"  type="hidden" required class="form-control" value="<?php echo $batchcode ?>">
-							<fieldset title="1">
+							<fieldset title="1" id="pic">
 								<legend class="text-semibold">Picture <br />
 
 								 </legend>
@@ -89,7 +89,7 @@ $resultsGender= $connect -> select($queryGender);
 
 										</label>
 										<br/>
-										<input type="file" id="wizard-picture" name="wizard-picture" accept=".jpg, .jpeg" required="required" class="file-input"  data-show-remove="false" data-show-caption="false" data-show-upload="false" data-browse-class="btn btn-primary btn-block">
+										<input type="file" id="wizard-picture" name="wizard-picture" accept=".jpg, .jpeg" required="required" class="file-input"  data-show-remove="false" data-show-caption="false" data-show-upload="false" data-browse-class="btn btn-primary btn-block" onchange="return Upload()" />
 										<br/>
 
 									</div>
@@ -99,7 +99,7 @@ $resultsGender= $connect -> select($queryGender);
 							</fieldset>
 
 
-							<fieldset title="2">
+							<fieldset title="2" id="generalInfo">
 								<legend class="text-semibold">General Information</legend>
 								<div class="row">
 									<div class="col-lg-4"><legend class="text-bold">Name</legend>
@@ -473,5 +473,68 @@ $resultsGender= $connect -> select($queryGender);
 			}
 		});
 	}
+	function Upload() {
+            //Get reference of FileUpload.
+            var fileUpload = document.getElementById("wizard-picture");
+
+            //Check whether the file is valid Image.
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+
+                //Check whether HTML5 is supported.
+                if (typeof (fileUpload.files) != "undefined") {
+                   
+                    //Initiate the FileReader object.
+                    var reader = new FileReader();
+                    
+                    //Read the contents of Image File.
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function (e) {
+                        
+                        //Initiate the JavaScript Image object.
+                        var image = new Image();
+                        
+                        //Set the Base64 string return from FileReader as source.
+                        image.src = e.target.result;
+
+                        //Validate the File Height and Width.
+                        image.onload = function () {
+                            var height = this.height;
+                            var width = this.width;
+  							if(height == 0){
+  								alert("Height and Width must not exceed 100px.");
+  								return false;
+  							}
+                            if (height > 100 || width > 100) {
+                                alert("Height and Width must not exceed 100px.");
+                                return false;
+                            }
+                            else{
+                            	if(height == width){
+                            		alert("Uploaded image has valid Height and Width.");
+	                            	return true;	
+                            	}                           	
+                            	else if(height != width){
+                            		 alert("Height and Width must equal.");
+                                	return false;
+                            	}
+
+                            	 
+	                            
+                            }
+                            
+                        };
+                    }
+                    //error
+                    
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
+            }
+        }
 </script>
 </html>

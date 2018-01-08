@@ -4,32 +4,35 @@ require_once('../UI/StrandHandler.php');
 $connect = new Connect();
 $con = $connect-> connectDB();
 $queryAccount="";
+$queryCenter ="";
 $idbatch="";
 $idstrand ="";
-$queryBatch = "SELECT batch.idbatch, capacity, (select count(*) as count from applicants as a WHERE a.idbatch = batch.idbatch AND a.idstrand = strand.idstrand) as counter, strand, strand.idStrand FROM slots JOIN strand ON strand.idstrand = slots.idstrand JOIN batch ON batch.idbatch = slots.idbatch WHERE capacity != 0";
+$idcenter = "";
+$queryBatch = "SELECT batch.idbatch, capacity, (select count(*) as count from applicants as a WHERE a.idbatch = batch.idbatch AND a.idstrand = strand.idstrand) as counter, strand, strand.idStrand FROM slots JOIN strand ON strand.idstrand = slots.idstrand JOIN batch ON batch.idbatch = slots.idbatch WHERE capacity != 0 and batch.markasdeleted = 0 ORDER BY idbatch";
 $resultBatch = $connect->select($queryBatch);
-if(isset($_GET['idbatch'])&&isset($_GET['idstrand'])){
+if(isset($_GET['idbatch'])&& isset($_GET['idstrand']) && isset($_GET['idcenter'])){
 	$idbatch = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idbatch'])));
 	$idstrand = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idstrand'])));
-	$queryAccount = "SELECT idapplicant, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode 
-	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand
+	$idcenter = mysqli_real_escape_string($con,stripcslashes(trim($_GET['idcenter'])));
+	$queryAccount = "SELECT idapplicant,strand.idstrand,center.idcenter, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode ,centerName
+	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand,center
 	where applicants.idAccountInformation=accountinformation.idAccountInformation  
 	and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
 	and applicants.idtargetcourse=targetcourse.idtargetcourse 
-	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and batch.idbatch= ".$idbatch. "  and applicants.idStrand = ".$idstrand." ORDER BY applicants.idAccountInformation";
+	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and center.idCenter = batch.idCenter  and batch.idbatch= ".$idbatch. "  and applicants.idStrand = ".$idstrand." and center.idCenter =".$idcenter." ORDER BY applicants.idAccountInformation";
+	
 }
 else{
-	foreach ($resultBatch as $batch) {
-		$queryAccount = "SELECT idapplicant, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode 
-	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand
+		$queryAccount = "SELECT idapplicant,strand.idstrand,center.idcenter, firstName, LastName, middleName, genderName , batch.idbatch, schoolName, strand, targetCourse, batchCode ,centerName
+	FROM accountinformation, applicants, batch,gender,targetcourse, school, strand,center
 	where applicants.idAccountInformation=accountinformation.idAccountInformation  
 	and applicants.idStrand=strand.idStrand and applicants.idBatch=batch.idBatch 
 	and applicants.idtargetcourse=targetcourse.idtargetcourse 
-	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and batch.idbatch= ".$batch['idbatch']. " ORDER BY applicants.idAccountInformation";	
-		break;
-	}
+	and applicants.idSchool=school.idSchool and gender.idGender = accountinformation.idGender and center.idCenter = batch.idbatch and batch.idbatch= (SELECT idbatch FROM batch LIMIT 1) and strand.idstrand = (SELECT idStrand FROM strand LIMIT 1) and center.idCenter = (SELECT idCenter FROM center ORDER BY idCenter LIMIT 1) ORDER BY applicants.idAccountInformation;";	
 }
 $queryStrand = "SELECT * FROM Strand ORDER BY strand";
+$queryCenter = "SELECT * FROM center JOIN batch ON batch.idCenter = center.idCenter where batch.idbatch=(SELECT idbatch FROM batch LIMIT 1)";
+$resultCenter = $connect->select($queryCenter);
 $resultStrand = $connect->select($queryStrand);
 $resultsAccount= $connect->select($queryAccount);
 include('../UI/header/header_admin.php');
@@ -72,7 +75,7 @@ include('../UI/header/header_admin.php');
 											<div class="col-lg-3">
 												<div class="form-group">
 													<label>Batch: </label>					                 
-													<select class="form-control" id="batch" name="batch" onchange="getMasterlist(this.value,strand.value);">
+													<select class="form-control" id="batch" name="batch" onchange="getMasterlist();">
 														<?php $tempo;
 															foreach($resultBatch as $batch){
 																if($tempo != $batch['idbatch']){
@@ -90,7 +93,7 @@ include('../UI/header/header_admin.php');
 											<div class="col-lg-3">
 												<div class="form-group">
 													<label>Strand: </label>
-									                <select class="form-control" id="strand" name="strand" onchange="getMasterlist(batch.value,this.value);">
+									                <select class="form-control" id="strand" name="strand" onchange="getMasterlist();">
 														<?php
 															foreach($resultStrand as $strand){
 																if($idstrand==$strand['idStrand']){
@@ -99,6 +102,22 @@ include('../UI/header/header_admin.php');
 															<?php }
 															else{?>
 															<option value="<?php echo $strand['idStrand'];?>"><?php echo $strand['strand']?></option>
+															<?php }}?>
+									                </select>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="form-group">
+													<label>Center: </label>
+									                <select class="form-control" id="center" name="center" onchange="getMasterlist();">
+														<?php
+															foreach($resultCenter as $center){
+																if($idcenter==$center['idCenter']){
+															?>
+															<option value="<?php echo $center['idCenter'];?>" selected><?php echo $center['centerName']?></option>
+															<?php }
+															else{?>
+															<option value="<?php echo $center['idCenter'];?>"><?php echo $center['centerName']?></option>
 															<?php }}?>
 									                </select>
 												</div>
@@ -121,19 +140,20 @@ include('../UI/header/header_admin.php');
 										</thead>
 
 										<tbody style="font-size: 13px;">
-										<?php foreach($resultsAccount as $result){
+										<?php if($resultsAccount){foreach($resultsAccount as $result){
 												?>
 								            <tr>
 								            	<input type="hidden" name="batchNumber" value="<?php echo $result['idbatch'];?>">
-								            	<input type="hidden" name="strand" value="<?php echo $result['strand'];?>">
-								                <td><input type="hidden" name="id[]" value="<?php echo $result['idapplicant'];?>"><?php echo $result['idapplicant'];?></td>
-								                <td><input type="hidden" name="name[]" value="<?php echo $result['LastName'].', '.$result['firstName'].' '.$result['middleName'] ;?>"><?php echo $result['LastName'].', '.$result['firstName'].' '.$result['middleName'] ;?></td>
-								                <td><input type="hidden" name="schoolName[]" value="<?php echo $result['schoolName'];?>"><?php echo $result['schoolName'];?></td>
-								                <td><input type="hidden" name="gender[]" value="<?php echo $result['genderName'];?>"><?php echo $result['genderName'];?></td>
-								                <td><input type="hidden" name=""><?php echo $result['targetCourse'];?></td>
+								            	<input type="hidden" name="strand" value="<?php echo $result['idstrand'];?>">
+								            	<input type="hidden" name="center" value="<?php echo $result['idcenter'];?>">
+								                <td><?php echo $result['idapplicant'];?></td>
+								                <td><?php echo $result['LastName'].', '.$result['firstName'].' '.$result['middleName'] ;?></td>
+								                <td><?php echo $result['schoolName'];?></td>
+								                <td><?php echo $result['genderName'];?></td>
+								                <td><?php echo $result['targetCourse'];?></td>
 												
 								            </tr>
-								            <?php }?>
+								            <?php }}?>
 
 								        </tbody>
 
@@ -176,8 +196,12 @@ include('../UI/header/header_admin.php');
 				"orderable": true
 				} ]
 			} );
-			function getMasterlist(valBatch,valStrand){
-				window.location = "Student_ManageStudent.php?idbatch="+valBatch+"&idstrand="+valStrand;
+			function getMasterlist(){
+				var valBatch =$('#batch').val();
+				var valStrand=$('#strand').val();
+				var valCenter = $('#center').val();
+				window.location = "Student_ManageStudent.php?idbatch="+valBatch+"&idstrand="+valStrand+"&idcenter="+valCenter;
+
 			}
 	</script>
 </body>

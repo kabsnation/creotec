@@ -17,7 +17,6 @@ if(!empty($_POST["batchcode"]))
 			$r[$count]= "<h5 style='color:green'>".$row["strand"]." slot left: ". $slots[$row["idStrand"]] . "</h5>";
 			$count++;
 		}
-		$r[2]=1;
 		echo json_encode($r);
 		$count =0;
 	}

@@ -473,6 +473,17 @@ $resultsGender= $connect -> select($queryGender);
 			}
 		});
 	}
+
+		// var isPaused = false;
+
+		// function Uploader(){
+		// 	isPaused = true;
+
+		// 	var fileUpload = document.getElementById("wizard-picture");
+		// 	 	fileUpload.value = "";
+		// 	isPaused = false;
+	}
+
 	function Upload() {
             //Get reference of FileUpload.
             var fileUpload = document.getElementById("wizard-picture");
@@ -501,11 +512,8 @@ $resultsGender= $connect -> select($queryGender);
                         image.onload = function () {
                             var height = this.height;
                             var width = this.width;
-  							if(height == 0){
-  								alert("Height and Width must not exceed 100px.");
-  								return false;
-  							}
                             if (height > 100 || width > 100) {
+                            	// fileUpload.value= "";
                                 alert("Height and Width must not exceed 100px.");
                                 return false;
                             }

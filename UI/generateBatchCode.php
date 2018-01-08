@@ -24,7 +24,8 @@ if(isset($_POST['idschool'])){
 				$result = $connect->insert($query);
 			}
 				if($result){
-					echo "<script>alert('Success! Batch Code: ".$batchCode."'); window.location='Generate_BatchCode.php?id=".$batchId.";</script>";
+					echo "<script>window.location='Generate_BatchCode.php?id=".$batchId."';
+					</script>";
 				}
 		}
 	}

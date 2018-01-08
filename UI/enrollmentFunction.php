@@ -2,7 +2,6 @@
 require_once('../config/config.php');
 $connect = new Connect();
 $con = $connect-> connectDB();
-$pdfmaker = new pdfMaker();
 $target_dir = "images/";
 $target_file = $target_dir . basename($_FILES["wizard-picture"]["name"]);
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -85,11 +84,9 @@ if(isset($_POST["batchcode"])){
 		if($result!=""){
 			$query="INSERT INTO `applicants`(`idtargetcourse`, `idAccountInformation`, `idStrand`, `idbatch`,picture,idSchool) VALUES('".$targetCourse."',".$result.",".$strand.",(SELECT idbatch FROM batch WHERE batchCode = '".$batchcode."'),'".$target_file."',".$school.")";
 			$result = $connect -> insertWithLastId($query);
-			
 			if($result){
-				
 				 echo '<script type="text/javascript">
-				 	window.location = "preview.php?id="'.$result.';
+				 	window.location = "preview.php?id='.$result.'&batchCode='.$batchcode.'";
 				 	</script>';
 			}
 			else{

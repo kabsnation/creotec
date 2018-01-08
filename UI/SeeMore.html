@@ -1,0 +1,213 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Add Announcements</title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../assets/css/font.css">
+	<link rel="stylesheet" href="../assets/css/animate.css">
+	<link rel="stylesheet" href="../assets/css/stylee.css">
+	<link rel="stylesheet" href="../assets/css/structure.css">
+	<link rel="stylesheet" href="../assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/structure.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/animate.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="assets/js/plugins/forms/validation/validate.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/inputs/touchspin.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/switch.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/form_validation.js"></script>
+
+	<style>
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+</style>
+	<!-- /theme JS files -->
+</head>
+<body>
+	<!-- Main navbar -->
+	<div class="navbar navbar-default">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="index.php"><img src="assets/images/logo_light.png" alt=""></a>
+
+			<ul class="nav navbar-nav visible-xs-block">
+				<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+			</ul>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-mobile">
+			<ul class="nav navbar-nav">
+				<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+			</ul>
+
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+					</li>
+
+					<li class="dropdown dropdown-user">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<span>Username</span>
+							<i class="caret"></i>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-right">
+							<!-- <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li> -->
+							<li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main sidebar -->
+			<div class="sidebar sidebar-main sidebar-default">
+				<div class="sidebar-content">
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								<!-- Main -->
+								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main"></i></li>
+								<li><a href="#"><i class="icon-newspaper"></i> <span>Home</span></a></li>
+								<li class="navigation-header"><span>Publish</span> <i class="icon-menu" title="Publish"></i></li>
+								<li class="active"><a href="index.php"><i class="icon-pencil7"></i> <span>Publish News</span></a></li>
+								
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Page header -->
+				<div class="page-header page-header-default">
+					<div class="page-header-content">
+						<div class="page-title">
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">News & Announcements</span> - Published News</h4>
+						</div>
+					</div>
+				</div>
+
+  <div class="container" style="margin-left: 190px; width: 90%;">
+  	<div class="row">
+  	<div class="col-md-10">
+   <div class="singlepost_area">
+              <div class="singlepost_content"> <a href="#" class="stuff_category">Technology</a> <span class="stuff_date">Nov <strong>17</strong></span>
+                <h2><a href="#">Duis quis erat non nunc fringilla</a> </h2>
+                <a href="#" class="stuff_category">By: Author</a>
+
+                 <div style="margin-left: 75px; margin-bottom: 3px; margin-top: 10px;"> 
+                 <button for="share" data-toggle="tooltip" title="Copy Link" class="label entypo-export"><i class="fa fa-share" aria-hidden="true"></i></button>
+                 
+				</div>
+
+               <!--  <div id="wrapper">
+					  <input type="checkbox" class="checkbox" id="share" checked />
+					  <label for="share" class="label entypo-export"><i class="fa fa-share" aria-hidden="true"></i></label>
+					  <div class="social">
+					    <ul class="unordered-list">
+					      <li class="entypo-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+					      <li class="entypo-youtube"><i class="fa fa-youtube" aria-hidden="true"></i></li>
+					      <li class="entypo-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></li>    
+					      <li class="entypo-gplus"><i class="fa fa-google-plus" aria-hidden="true"></i></li>
+					      <li class="entypo-instagram"><i class="fa fa-instagram" aria-hidden="true"></i></li>
+					      <li class="entypo-dropbox"><i class="fa fa-dropbox" aria-hidden="true"></i></li>
+					      <li class="entypo-github"><i class="fa fa-github" aria-hidden="true"></i></li>      
+					    </ul>
+					  </div>  
+				</div> -->
+				
+               
+                <img class="img-center" style="width: 90%;" src="../images/login_cover.jpg" alt="">
+                <p>Quisque ligulas ipsum, euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. Vestibulum sodales ante a purus volutpat euismod. Proin sodales quam nec ante sollicitudin lacinia. Ut egestas bibendum tempor. Morbi non nibh sit amet ligula blandit ullamcorper in nec risus. Pellentesque fringilla diam faucibus tortor bibendum vulputate. Etiam turpis urna, rhoncus et mattis ut, dapibus eu nunc. Nunc sed aliquet nisi. Nullam ut magna non lacus adipiscing volutpat. Aenean odio mauris, consectetur quis consequat quis, blandit a nunc. Sed orci erat, placerat ac interdum ut, suscipit eu augue. Nunc vitae mi tortor. Ut vel justo quis lectus elementum </p>
+                <blockquote>Donec volutpat nibh sit amet libero ornare non laoreet arcu luctus. Donec id arcu quis mauris euismod placerat sit amet ut metus. Sed imperdiet fringilla sem eget euismod. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque adipiscing, neque ut pulvinar tincidunt, est sem euismod odio, eu ullamcorper turpis nisl sit amet velit. Nullam vitae nibh odio, non scelerisque nibh. Vestibulum ut est augue, in varius purus.</blockquote>
+
+                <!-- <ul>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                  <li>Nunc tincidunt, elit non cursus euismod, lacus augue</li>
+                </ul>
+                <p>Nunc tincidunt, elit non cursus euismod, lacus augue ornare metus, egestas imperdiet nulla nisl quis mauris. Suspendisse a pharetra urna. Morbi dui lectus, pharetra nec elementum eget, vulputate ut nisi. Aliquam accumsan, nulla sed feugiat vehicula, lacus justo semper libero, quis porttitor turpis odio sit amet ligula. Duis dapibus fermentum orci, nec malesuada libero vehicula ut. Integer sodales, urna eget interdum eleifend, nulla nibh laoreet nisl, quis dignissim mauris dolor eget mi. Donec at mauris enim. Duis nisi tellus, adipiscing a convallis quis, tristique vitae risus. Nullam molestie gravida lobortis. Proin ut nibh quis felis auctor ornare. Cras ultricies, nibh at mollis faucibus, justo eros porttitor mi, quis auctor lectus arcu sit amet nunc. Vivamus gravida vehicula arcu, vitae vulputate augue lacinia faucibus.</p> -->
+                
+                <div class="singlepage_pagination"> <a class="previous_btn" href="#">Previous</a> <a class="next_btn" href="#">Next</a> </div>
+              </div>
+            </div>
+        </div>
+ </div>
+  </div>
+			</div>
+			<!-- /Main content -->
+		</div>
+		<!-- Page content -->
+	</div>
+	<!-- Page container -->
+</body>
+</html>
